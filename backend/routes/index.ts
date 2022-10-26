@@ -7,17 +7,22 @@ router.get('/', (req, res) => {
     res.send("REST API is working!")
 })
 
-// Songs routes
+/* 
+    Gangs routes
+*/
+
+// Get all gangs
 router.get('/gangs', async (req, res) => {
-    const songs = await Gang.find()
-    res.send(songs)
+    const gangs = await Gang.find()
+    res.send(gangs)
 })
 
+// Create a new gang
 router.post('/gangs', async (req, res) => {
     const {name} = req.body
     const gang = new Gang({name})
-    await gang.save()
-    res.json(gang)
+    /* await gang.save()
+    res.json(gang) */
 })
 
 // router.patch('/songs/:id', async (req, res) => {
