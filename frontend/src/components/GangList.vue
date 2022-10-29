@@ -1,12 +1,12 @@
 <template>
     <div class="container">
         <div class="row">
-            <template v-for="(song, index) in songs" :key="index">
+            <template v-for="(gang, index) in gangs" :key="index">
                 <div class="col-4-sm-12 my-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ song.title }}</h5>
-                            <p class="card-text">{{ song.lyrics }}</p>
+                            <h5 class="card-title">{{ gang.name }}</h5>
+                            <p class="card-text">{{ gang }}</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -18,23 +18,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getSongs } from '@/services/SongService'
-import { Song } from '@/interfaces/Song'
+import { getGangs } from '@/services/GangService'
+import { Gang } from '@/interfaces/Gang'
 
 export default defineComponent({
     data(){
         return {
-            songs: [] as Song[]
+            gangs: [] as Gang[]
         }
     },
     mounted(){
-        this.loadSongs()
+        this.loadGangs()
     },
     methods:{
-        async loadSongs(){
+        async loadGangs(){
             try {
-                const res = await getSongs();
-                this.songs = res.data
+                const res = await getGangs();
+                this.gangs = res.data
             } catch (err) {
                 console.log(err)
             }

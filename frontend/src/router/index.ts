@@ -2,14 +2,14 @@ import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router"
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        alias: '/songs',
-        name: 'songs',
-        component: () => import('@/components/SongList.vue')
+        alias: '/gangs',
+        name: 'gangs',
+        component: () => import('@/components/GangList.vue')
     },
     {
-        path: '/songs/new',
-        name: 'songs-new',
-        component: () => import('@/components/SongForm.vue')
+        path: '/gangs/new',
+        name: 'gangs-new',
+        component: () => import('@/components/GangForm.vue')
     },
     {
         path: '/songs/:id',
