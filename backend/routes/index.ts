@@ -13,16 +13,23 @@ router.get('/', (req, res) => {
 
 // Get all gangs
 router.get('/gangs', async (req, res) => {
-    const gangs = await Gang.find()
-    res.send(gangs)
+    try {
+        const gangs = await Gang.find()
+        res.send(gangs)
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 // Create a new gang
 router.post('/gangs', async (req, res) => {
-    const {name} = req.body
-    const gang = new Gang({name})
-    /* await gang.save()
-    res.json(gang) */
+    const gang = new Gang(req.body)
+    try {
+        await gang.save()
+        res.json(gang)
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 // router.patch('/songs/:id', async (req, res) => {
