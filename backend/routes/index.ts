@@ -32,26 +32,34 @@ router.post('/gangs', async (req, res) => {
     }
 })
 
-// router.patch('/songs/:id', async (req, res) => {
-//     const updatedSong = await Song.findByIdAndUpdate(req.params.id, req.body, {new: true})
-//     res.send(updatedSong)
-// })
+// Get one gang
+router.get('/gangs/:id', async (req, res) => {
+    try {
+        const gang = await Gang.findById(req.params.id)
+        res.send(gang)
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
 
-// router.get('/songs/:id', async (req, res) => {
-//     try {
-//         const song = await Song.findById(req.params.id)
-//         res.send(song)
-//     } catch (error) {
-//         res.status(404).send(error)
-//     }
-// })
+// Edit one gang
+router.patch('/gangs/:id', async (req, res) => {
+    try {
+        const updatedGang = await Gang.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        res.send(updatedGang)
+    } catch (error) {
+        res.send(error)
+    }
+})
 
-// router.delete('/songs/:id', async (req, res) => {
-//     try {
-//         const song = await Song.findByIdAndDelete(req.params.id)
-//         res.send(song)
-//     } catch (error) {
-//         res.status(404).send(error)
-//     }
-// })
+// Delete one gang
+router.delete('/gangs/:id', async (req, res) => {
+    try {
+        const gang = await Gang.findByIdAndDelete(req.params.id)
+        res.send(gang)
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
+
 export default router
