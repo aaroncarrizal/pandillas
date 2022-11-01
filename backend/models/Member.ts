@@ -1,10 +1,10 @@
 import {Schema , model, Types} from 'mongoose'
 
 const memberSchema = new Schema({
-    // gangId: {
-    //     type: Types.ObjectId,
-    //     ref: "Gang"
-    // },
+    gangId: {
+        type: Types.ObjectId,
+        ref: "Gang"
+    },
     name: {
         firstName: {
             type: String,

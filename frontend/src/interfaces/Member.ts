@@ -1,6 +1,7 @@
 import { Place } from './Place'
 
 export interface Member {
+    gangId: string,
     name: {
         firstName: string,
         middleName: string,
