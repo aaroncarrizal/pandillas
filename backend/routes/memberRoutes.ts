@@ -13,45 +13,48 @@ router.get('/members', async (req, res) => {
     }
 })
 
-/* // Create a new gang
-router.post('/gangs', async (req, res) => {
-    const gang = new Gang(req.body)
+// Create a new member
+router.post('/members', async (req, res) => {
+    const member = new Member(req.body)
     try {
-        await gang.save()
-        res.json(gang)
+        if(!member.gangId){
+            throw 'gangId should not be null'
+        }
+            await member.save()
+            res.json(member)
     } catch (error) {
         res.send(error)
     }
 })
 
 // Get one gang
-router.get('/gangs/:id', async (req, res) => {
+router.get('/members/:id', async (req, res) => {
     try {
-        const gang = await Gang.findById(req.params.id)
-        res.send(gang)
+        const member = await Member.findById(req.params.id)
+        res.send(member)
     } catch (error) {
         res.status(404).send(error)
     }
 })
 
 // Edit one gang
-router.patch('/gangs/:id', async (req, res) => {
+router.patch('/members/:id', async (req, res) => {
     try {
-        const updatedGang = await Gang.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        res.send(updatedGang)
+        const updatedMember = await Member.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        res.send(updatedMember)
     } catch (error) {
         res.send(error)
     }
 })
 
 // Delete one gang
-router.delete('/gangs/:id', async (req, res) => {
+router.delete('/members/:id', async (req, res) => {
     try {
-        const gang = await Gang.findByIdAndDelete(req.params.id)
-        res.send(gang)
+        const member = await Member.findByIdAndDelete(req.params.id)
+        res.send(member)
     } catch (error) {
         res.status(404).send(error)
     }
-}) */
+})
 
 export default router
