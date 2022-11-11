@@ -27,7 +27,7 @@ router.post('/members', async (req, res) => {
     }
 })
 
-// Get one gang
+// Get one member
 router.get('/members/:id', async (req, res) => {
     try {
         const member = await Member.findById(req.params.id)
@@ -37,7 +37,7 @@ router.get('/members/:id', async (req, res) => {
     }
 })
 
-// Edit one gang
+// Edit one member
 router.patch('/members/:id', async (req, res) => {
     try {
         const updatedMember = await Member.findByIdAndUpdate(req.params.id, req.body, {new: true})
@@ -47,7 +47,7 @@ router.patch('/members/:id', async (req, res) => {
     }
 })
 
-// Delete one gang
+// Delete one member
 router.delete('/members/:id', async (req, res) => {
     try {
         const member = await Member.findByIdAndDelete(req.params.id)
