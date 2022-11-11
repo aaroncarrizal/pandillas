@@ -5,6 +5,7 @@ import baseRoutes from './routes/index'
 import gangRoutes from './routes/gangRoutes'
 import memberRoutes from './routes/memberRoutes'
 import placeRoutes from './routes/placeRoutes'
+import crimeRoutes from './routes/crimeRoutes'
 
 const app = express()
 app.use(cors())
@@ -14,4 +15,5 @@ app.use("/api", baseRoutes)
 app.use("/api", gangRoutes)
 app.use("/api", memberRoutes)
 app.use("/api", placeRoutes)
+app.use("/api", crimeRoutes)
 export default app
