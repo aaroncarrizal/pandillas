@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-light mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Navbar</a>
+            <a class="navbar-brand" href="/home">Navbar</a>
             <button 
                 class="navbar-toggler" 
                 type="button" 
@@ -15,10 +15,19 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" href="/gangs">Pandillas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/gangs/new">New gang</a>
+                        <a class="nav-link" href="/members">Miembros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/places">Lugares</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/crimes">Delitos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">Usuarios</a>
                     </li>
                 </ul>
             </div>
