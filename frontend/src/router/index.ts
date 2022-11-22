@@ -29,6 +29,16 @@ const routes: RouteRecordRaw[] = [
         path: '/member',
         name: 'member-new',
         component: () => import('@/components/MemberForm.vue')
+    },
+    {
+        path: '/report',
+        name: 'generate-report',
+        component: () => import('@/components/GenerateReport.vue')
+    },
+    {
+        path: '/user',
+        name: 'user-config',
+        component: () => import('@/components/UserConfig.vue')
     }
 ]
 

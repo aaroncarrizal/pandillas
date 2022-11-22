@@ -43,9 +43,44 @@
                     </div>
                 </div>
             </div>
+            <div class="row my-5">
+                <div class="col">
+                    <p class="h5 text-center mt-2 mb-4">Delitos asociados</p>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a vehiculo</div>   
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a persona</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a casa habitación</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a comercio</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a repartidos</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Narcomenudeo</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Homicidio</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Extorsiones</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
+                </div>
+                <div class="col">
+                    <p class="h5 text-center mt-2 mb-4">Faltas cometidas</p>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Tomar en vía publica</div>   
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Riñas</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Violencia familiar</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Consumo de drogas</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
+                    <div class="my-2"><input class="form-check-input" type="checkbox"> Escandalizar</div>
+                </div>
+                <div class="col">
+                    <p class="h5 text-center mt-2 mb-4">Peligrosidad</p>
+                    <div class="my-2"><input class="form-check-input" type="radio" name="peligrosidad"> Alto</div>   
+                    <div class="my-2"><input class="form-check-input" type="radio" name="peligrosidad"> Medio</div>
+                    <div class="my-2"><input class="form-check-input" type="radio" name="peligrosidad"> Bajo</div>
+                </div>
+            </div>
+            <div class="row justify-content-center my-3">
+                <div class="col-2">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
-    
 </template>
 <script></script>
 <style></style>
