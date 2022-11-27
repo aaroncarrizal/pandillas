@@ -16,9 +16,9 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/GangForm.vue')
     },
     {
-        path: '/songs/:id',
+        path: '/gangs/:id',
         name: 'songs-details',
-        component: () => import('@/components/SongDetails.vue')
+        component: () => import('@/components/GangDetails.vue')
     },
     {
         path: '/faq',

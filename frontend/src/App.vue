@@ -23,7 +23,6 @@ export default defineComponent({
         },
         changeToken(newToken: string){
             this.token = newToken
-            console.log(this.token)
         },
     }
 });
