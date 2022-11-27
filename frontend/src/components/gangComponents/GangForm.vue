@@ -1,35 +1,41 @@
 <template>
     <div class="container">
         <p class="h1 text-center">Registro de pandillas</p>
-        <form>
+        <form @submit.prevent="saveGang()">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <p class="h5 text-center my-4">Datos principales</p>
                     <div class="my-3">
-                        <input class="form-control my-1" placeholder="Nombre de pandilla" v-model="gang.name" required>
-                        <select class="form-select" v-model="gang.leader">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" v-model="gang.name" placeholder="Nombre" required>
+                            <label for="name">Nombre</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Descripción</label>
+                        </div>
+                        <select class="form-select" aria-label="Default select example" v-model="gang.leader">
                             <option selected>Líder</option>
-                            <template>
-
+                            <template v-for="(member, index) in members" :key="index">
+                                <option :value="member._id">{{ member.name }}</option>
                             </template>
                         </select>
-                        <textarea class="form-control" placeholder="Descripción general"  v-model="gang.description" required></textarea>
-                        <!--<input class="form-control" id="songTitle" v-model="gang.name">-->
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <p class="h5 text-center my-4">Ubicación</p>
-                    <div class="my-3">
-                        <input class="form-control my-1" placeholder="Calle" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Número" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Colonia" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Código Postal" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Entre calle y calle" v-model="gang.name"> <!--Ojo-->
-                    </div>
+                    <!-- <div class="my-3">
+                        <input class="form-control my-1" placeholder="Calle" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Número" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Colonia" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Código Postal" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Entre calle y calle" v-model="gang.name"> 
+                    </div> -->
+                    seleccionar de las que ya estan
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <p class="h5 text-center my-4">Delitos asociados</p>
-                    <div class="my-3">
+                    <!-- <div class="my-3">
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a persona</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a vehículo</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a casa habitación</div>
@@ -39,27 +45,31 @@
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Extorsiones</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Otros Delitos</div>
-                    </div>
+                    </div> -->
+                    Lista de los que ya existen
                 </div>
-                <div class="col-sm-3">
-                    <p class="h5 text-center my-4">FALTAS COMETIDAS</p>
-                    <div class="my-3">
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Tomar en vía pública</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Riñas</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Violencia Familiar</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Consumo de drogas</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Escandalizar</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Otras Faltas</div>
-                        <p class="h5 text-center my-4">PELIGROSIDAD</p>
-                        <div class="my-2"><input class="form-check-input" type="radio" name="peligro"> Alto</div>
-                        <div class="my-2"><input class="form-check-input" type="radio" name="peligro"> Medio</div>
-                        <div class="my-2"><input class="form-check-input" type="radio" name="peligro"> Bajo</div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="h5 text-center my-4">Alianzas</p>
+    
                 </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button" @click="saveGang()">REGISTRAR</button>
-                    <button class="btn btn-secondary" type="button" @click="saveGang()">LIMPIAR</button> <!--Ojo-->
+                <div class="col-md-6">
+                    <p class="h5 text-center my-4">Rivalidades</p>
+    
+                </div>
+            </div>
+            <div class="row mb-4">
+                <p class="h5 text-center my-4">Peligrosidad</p>
+                <label for="peligrosidad" class="form-label">0 a 5</label>
+                <input type="range" class="form-range" min="0" max="5" id="peligrosidad" v-model="gang.dangerousness">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit" @click="saveGang()">Registrar</button>
+                        <button class="btn btn-secondary" type="submit">Limpiar</button> <!--Ojo-->
+                    </div>
                 </div>
             </div>
         </form>
@@ -72,6 +82,8 @@ import { defineComponent } from 'vue'
 import { createGang } from '@/services/GangService'
 import { getMembers} from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
+import { Place } from '@/interfaces/Place'
+import { Crime } from '@/interfaces/Crime'
 
 export default defineComponent({
     data() {
@@ -81,8 +93,7 @@ export default defineComponent({
         }
     },
     mounted(){
-        getMembers()
-        console.log("asdfasdfasdfasdaf")
+        this.getMembers()
     },
     methods: {
         async saveGang(){
@@ -95,6 +106,7 @@ export default defineComponent({
         },
         async getMembers(){
             try {
+                console.log("adfasdfas")
                 const res = await getMembers()
                 console.log(res)
             } catch (error) {
