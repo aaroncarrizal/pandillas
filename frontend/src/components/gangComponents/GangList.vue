@@ -59,7 +59,7 @@ export default defineComponent({
     methods:{
         async loadGangs(){
             try {
-                const res = await getGangs();
+                const res = await getGangs()
                 this.gangs = res.data
             } catch (err) {
                 console.log(err)
