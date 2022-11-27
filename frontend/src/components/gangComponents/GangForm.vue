@@ -75,7 +75,7 @@
             <div class="row justify-content-center">
                 <div class="col-8">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-success" type="submit" @click="saveGang()">Registrar</button>
+                        <button class="btn btn-success" type="submit">Registrar</button>
                         <button class="btn btn-secondary" type="submit">Limpiar</button> <!--Ojo-->
                     </div>
                 </div>
