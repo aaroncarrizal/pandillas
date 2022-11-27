@@ -8,17 +8,17 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/gangs',
         name: 'gangs',
-        component: () => import('@/components/GangList.vue')
+        component: () => import('@/components/gangComponents/GangList.vue')
     },
     {
         path: '/gangs/new',
         name: 'gangs-new',
-        component: () => import('@/components/GangForm.vue')
+        component: () => import('@/components/gangComponents/GangForm.vue')
     },
     {
         path: '/gangs/:id',
-        name: 'songs-details',
-        component: () => import('@/components/GangDetails.vue')
+        name: 'gang-details',
+        component: () => import('@/components/gangComponents/GangDetails.vue')
     },
     {
         path: '/faq',
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/member',
         name: 'member-new',
-        component: () => import('@/components/MemberForm.vue')
+        component: () => import('@/components/memberComponents/MemberForm.vue')
     },
     {
         path: '/report',
