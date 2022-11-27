@@ -9,7 +9,7 @@ export interface Gang {
     numMembers: number,
     ageAverage: number,
     reunionPlace: Place,
-    dengerousness: number,
+    dangerousness: number,
     rivalries: [],
     alliances: [],
     crimes: []
