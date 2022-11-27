@@ -14,33 +14,35 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Correo electrónico" v-model="user.email">
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-person-circle"></i>
-                    </span>
+        <form @submit.prevent="login()">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Correo electrónico" v-model="user.email" required>
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="bi bi-person-circle"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Contraseña" v-model="user.password">
-                    <span class="input-group-text" id="basic-addon2">
-                        <i class="bi bi-lock-fill"></i>
-                    </span>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Contraseña" v-model="user.password" required>
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="bi bi-lock-fill"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="d-grid gap-2">
-                    <button class="btn btn-success" type="button" @click="login()">Acceder</button>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit" @click="login()">Acceder</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 <script lang="ts">
