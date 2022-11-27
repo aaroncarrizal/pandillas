@@ -11,11 +11,11 @@
                             <label for="name">Nombre</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea"></textarea>
+                            <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea" v-model="gang.description" required></textarea>
                             <label for="floatingTextarea">Descripción</label>
                         </div>
-                        <select class="form-select" aria-label="Default select example" v-model="gang.leader">
-                            <option selected>Líder</option>
+                        <label for="leader" class="form-label">Líder</label>
+                        <select id="leader" class="form-select" aria-label="Default select example" v-model="gang.leader">
                             <template v-for="(member, index) in members" :key="index">
                                 <option :value="member._id">{{ member.name }}</option>
                             </template>
@@ -52,11 +52,19 @@
             <div class="row">
                 <div class="col-md-6">
                     <p class="h5 text-center my-4">Alianzas</p>
-    
+                    <select class="form-select" multiple aria-label="multiple select example" v-model="gang.alliances">
+                        <template v-for="(gang, index) in gangs" :key="index">
+                            <option :value="gang._id">{{ gang.name }}</option>
+                        </template>
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <p class="h5 text-center my-4">Rivalidades</p>
-    
+                    <select class="form-select" multiple aria-label="multiple select example" v-model="gang.rivalries">
+                        <template v-for="(gang, index) in gangs" :key="index">
+                            <option :value="gang._id">{{ gang.name }}</option>
+                        </template>
+                    </select>
                 </div>
             </div>
             <div class="row mb-4">
@@ -77,9 +85,10 @@
 </template>
 
 <script lang="ts">
-import { Gang } from '@/interfaces/Gang'
 import { defineComponent } from 'vue'
+import { Gang } from '@/interfaces/Gang'
 import { createGang } from '@/services/GangService'
+import { getGangs } from '@/services/GangService'
 import { getMembers} from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
 import { Place } from '@/interfaces/Place'
@@ -89,11 +98,13 @@ export default defineComponent({
     data() {
         return {
             gang: {} as Gang,
+            gangs: [] as Gang[],
             members: [] as Member[]
         }
     },
     mounted(){
-        this.getMembers()
+        this.loadMembers()
+        this.loadGangs()
     },
     methods: {
         async saveGang(){
@@ -104,15 +115,22 @@ export default defineComponent({
                 console.log(err)
             }
         },
-        async getMembers(){
+        async loadMembers(){
             try {
-                console.log("adfasdfas")
                 const res = await getMembers()
-                console.log(res)
+                this.members = res.data
             } catch (error) {
                 console.log(error)
             }
-        }
+        },
+        async loadGangs(){
+            try {
+                const res = await getGangs()
+                this.gangs = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
     }
 })
 </script>
