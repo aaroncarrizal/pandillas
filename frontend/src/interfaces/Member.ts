@@ -11,5 +11,6 @@ export interface Member {
     birthdate: Date,
     username: string,
     residence: Place,
-    crimes: []
+    crimes: [],
+    _id: string
 }

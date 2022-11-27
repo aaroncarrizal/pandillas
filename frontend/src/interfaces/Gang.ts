@@ -12,5 +12,6 @@ export interface Gang {
     dangerousness: number,
     rivalries: [],
     alliances: [],
-    crimes: []
+    crimes: [],
+    _id: string
 }
