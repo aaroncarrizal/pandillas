@@ -21,14 +21,19 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/gangComponents/GangDetails.vue')
     },
     {
+        path: '/members',
+        name: 'members',
+        component: () => import('@/components/memberComponents/MemberList.vue')
+    },
+    {
+        path: '/members/new',
+        name: 'members-new',
+        component: () => import('@/components/memberComponents/MemberForm.vue')
+    },
+    {
         path: '/faq',
         name: 'faq',
         component: () => import('@/components/FaqPage.vue')
-    },
-    {
-        path: '/member',
-        name: 'member-new',
-        component: () => import('@/components/memberComponents/MemberForm.vue')
     },
     {
         path: '/report',

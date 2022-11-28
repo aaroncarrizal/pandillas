@@ -1,34 +1,41 @@
 <template>
     <div class="container">
         <p class="h1 text-center">Registro de pandillas</p>
-        <form>
+        <form @submit.prevent="saveGang()">
             <div class="row">
-                <div class="col-sm-3">
-                    <p class="h5 text-center my-4">DATOS PRINCIPALLES</p>
+                <div class="col-md-4">
+                    <p class="h5 text-center my-4">Datos principales</p>
                     <div class="my-3">
-                        <input class="form-control my-1" placeholder="Nombre de pandilla" v-model="gang.name">
-                        <input class="form-control my-1" placeholder="Líder de la pandilla" v-model="gang.leader"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Número de integrantes" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Edad Promedio" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Horario de Reunión" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="URL de Red Social" v-model="gang.name"> <!--Ojo-->
-                        <textarea class="form-control" placeholder="Descripción general"  v-model="gang.description" ></textarea>
-                        <!--<input class="form-control" id="songTitle" v-model="gang.name">-->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" v-model="gang.name" placeholder="Nombre" required>
+                            <label for="name">Nombre</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea" v-model="gang.description" required></textarea>
+                            <label for="floatingTextarea">Descripción</label>
+                        </div>
+                        <label for="leader" class="form-label">Líder</label>
+                        <select id="leader" class="form-select" aria-label="Default select example" v-model="gang.leader">
+                            <template v-for="(member, index) in members" :key="index">
+                                <option :value="member._id">{{ member.name }}</option>
+                            </template>
+                        </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <p class="h5 text-center my-4">UBICACIÓN</p>
-                    <div class="my-3">
-                        <input class="form-control my-1" placeholder="Calle" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Número" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Colonia" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Código Postal" v-model="gang.name"> <!--Ojo-->
-                        <input class="form-control my-1" placeholder="Entre calle y calle" v-model="gang.name"> <!--Ojo-->
-                    </div>
+                <div class="col-md-4">
+                    <p class="h5 text-center my-4">Ubicación</p>
+                    <!-- <div class="my-3">
+                        <input class="form-control my-1" placeholder="Calle" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Número" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Colonia" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Código Postal" v-model="gang.name"> 
+                        <input class="form-control my-1" placeholder="Entre calle y calle" v-model="gang.name"> 
+                    </div> -->
+                    seleccionar de las que ya estan
                 </div>
-                <div class="col-sm-3">
-                    <p class="h5 text-center my-4">DELITOS ASOCIADOS</p>
-                    <div class="my-3">
+                <div class="col-md-4">
+                    <p class="h5 text-center my-4">Delitos asociados</p>
+                    <!-- <div class="my-3">
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a persona</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a vehículo</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a casa habitación</div>
@@ -38,27 +45,39 @@
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Extorsiones</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
                         <div class="my-2"><input class="form-check-input" type="checkbox"> Otros Delitos</div>
-                    </div>
+                    </div> -->
+                    Lista de los que ya existen
                 </div>
-                <div class="col-sm-3">
-                    <p class="h5 text-center my-4">FALTAS COMETIDAS</p>
-                    <div class="my-3">
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Tomar en vía pública</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Riñas</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Violencia Familiar</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Consumo de drogas</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Escandalizar</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Otras Faltas</div>
-                        <p class="h5 text-center my-4">PELIGROSIDAD</p>
-                        <div class="my-2"><input class="form-check-input" type="radio" name="peligro"> Alto</div>
-                        <div class="my-2"><input class="form-check-input" type="radio" name="peligro"> Medio</div>
-                        <div class="my-2"><input class="form-check-input" type="radio" name="peligro"> Bajo</div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="h5 text-center my-4">Alianzas</p>
+                    <select class="form-select" multiple aria-label="multiple select example" v-model="gang.alliances">
+                        <template v-for="(gang, index) in gangs" :key="index">
+                            <option :value="gang._id">{{ gang.name }}</option>
+                        </template>
+                    </select>
                 </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button" @click="saveGang()">REGISTRAR</button>
-                    <button class="btn btn-secondary" type="button" @click="saveGang()">LIMPIAR</button> <!--Ojo-->
+                <div class="col-md-6">
+                    <p class="h5 text-center my-4">Rivalidades</p>
+                    <select class="form-select" multiple aria-label="multiple select example" v-model="gang.rivalries">
+                        <template v-for="(gang, index) in gangs" :key="index">
+                            <option :value="gang._id">{{ gang.name }}</option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <p class="h5 text-center my-4">Peligrosidad</p>
+                <label for="peligrosidad" class="form-label">0 a 5</label>
+                <input type="range" class="form-range" min="0" max="5" id="peligrosidad" v-model="gang.dangerousness">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit">Registrar</button>
+                        <button class="btn btn-secondary" type="submit">Limpiar</button> <!--Ojo-->
+                    </div>
                 </div>
             </div>
         </form>
@@ -66,25 +85,52 @@
 </template>
 
 <script lang="ts">
-import { Gang } from '@/interfaces/Gang'
 import { defineComponent } from 'vue'
+import { Gang } from '@/interfaces/Gang'
 import { createGang } from '@/services/GangService'
+import { getGangs } from '@/services/GangService'
+import { getMembers} from '@/services/MemberService'
+import { Member } from '@/interfaces/Member'
+import { Place } from '@/interfaces/Place'
+import { Crime } from '@/interfaces/Crime'
 
 export default defineComponent({
     data() {
         return {
-            gang: {} as Gang
+            gang: {} as Gang,
+            gangs: [] as Gang[],
+            members: [] as Member[]
         }
     },
+    mounted(){
+        this.loadMembers()
+        this.loadGangs()
+    },
     methods: {
-        async saveGang() {
+        async saveGang(){
             try {
                 const res = await createGang(this.gang)
                 console.log(res)
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+        async loadMembers(){
+            try {
+                const res = await getMembers()
+                this.members = res.data
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async loadGangs(){
+            try {
+                const res = await getGangs()
+                this.gangs = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
     }
 })
 </script>

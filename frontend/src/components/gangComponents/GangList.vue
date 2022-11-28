@@ -30,7 +30,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar" role="progressbar" :style="`width: ${gang.dengerousness}%;`"></div>
+                                    <div class="progress-bar" role="progressbar" :style="`width: ${gang.dangerousness}%;`"></div>
                                 </div>
                             </div>
                             <a :href="'/gangs/' + gang._id" class="btn btn-primary">Ver detalles</a>
@@ -59,7 +59,7 @@ export default defineComponent({
     methods:{
         async loadGangs(){
             try {
-                const res = await getGangs();
+                const res = await getGangs()
                 this.gangs = res.data
             } catch (err) {
                 console.log(err)
