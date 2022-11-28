@@ -44,6 +44,16 @@ const routes: RouteRecordRaw[] = [
         path: '/user',
         name: 'user-config',
         component: () => import('@/components/UserConfig.vue')
+    },
+    {
+        path: '/users',
+        name: 'users-list',
+        component: () => import('@/components/UsersList.vue')
+    },
+    {
+        path: '/users/new',
+        name: 'users-new',
+        component: () => import('@/components/UserForm.vue')
     }
 ]
 
