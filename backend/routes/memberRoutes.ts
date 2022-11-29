@@ -58,6 +58,19 @@ router.patch('/members/:id', async (req, res) => {
 router.delete('/members/:id', async (req, res) => {
     try {
         const member = await Member.findByIdAndDelete(req.params.id)
+        if(member){
+            let gang = await Gang.findById(member.gangId)
+            if(gang){
+                // Delete member from gang
+                for(let i = 0; i < gang.members.length; i++){
+                    if(gang.members[i].toString() == member.id){
+                        gang.members.splice(i,1)
+                    }
+                }
+                gang.numMembers = gang.members.length
+                gang.save()
+                }
+            }
         res.send(member)
     } catch (error) {
         res.status(404).send(error)
