@@ -69,14 +69,13 @@
             </div>
             <div class="row mb-4">
                 <p class="h5 text-center my-4">Peligrosidad</p>
-                <label for="peligrosidad" class="form-label">0 a 5</label>
-                <input type="range" class="form-range" min="0" max="5" id="peligrosidad" v-model="gang.dangerousness">
+                <label for="peligrosidad" class="form-label">Baja, Media o Alta</label>
+                <input type="range" class="form-range" min="1" max="3" id="peligrosidad" v-model="gang.dangerousness">
             </div>
             <div class="row justify-content-center">
                 <div class="col-8">
                     <div class="d-grid gap-2">
                         <button class="btn btn-success" type="submit">Registrar</button>
-                        <button class="btn btn-secondary" type="submit">Limpiar</button> <!--Ojo-->
                     </div>
                 </div>
             </div>
