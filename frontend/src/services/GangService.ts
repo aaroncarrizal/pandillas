@@ -16,3 +16,7 @@ export const getGang = async (id: string) => {
 export const deleteGang = async (id: string) => {
     return await axios.delete(`/gangs/${id}`)
 }
+
+export const updateGang = async (id: string, gang: Gang) => {
+    return await axios.patch(`/gangs/${id}`, gang)
+}

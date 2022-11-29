@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/gangComponents/GangDetails.vue')
     },
     {
+        path: '/gangs/edit/:id',
+        name: 'gang-edit',
+        component: () => import('@/components/gangComponents/GangEdit.vue')
+    },
+    {
         path: '/members',
         name: 'members',
         component: () => import('@/components/memberComponents/MemberList.vue')
