@@ -12,3 +12,7 @@ export const getGangs = async () => {
 export const getGang = async (id: string) => {
     return await axios.get(`/gangs/${id}`)
 }
+
+export const deleteGang = async (id: string) => {
+    return await axios.delete(`/gangs/${id}`)
+}

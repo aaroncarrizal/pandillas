@@ -10,13 +10,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <h3>{{ gang.description }}</h3>
                                     <h4>{{ gang.leader }}</h4>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="d-grid gap-2">
                                         <a :href="`/gangs/edit/${gangId}`" class="btn btn-primary" role="button">Editar</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="d-grid gap-2">
+                                        <a @click="removeGang(gangId)" class="btn btn-danger" role="button">Borrar</a>
                                     </div>
                                 </div>
                             </div>
@@ -88,6 +93,7 @@
 import { defineComponent } from 'vue'
 import { Gang } from '@/interfaces/Gang'
 import { getGang } from '@/services/GangService'
+import { deleteGang } from '@/services/GangService'
 import { getMembers} from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
 import { Place } from '@/interfaces/Place'
@@ -123,6 +129,14 @@ export default defineComponent({
                 console.log(err)
             }
         },
+        async removeGang(id: string){
+            try {
+                await deleteGang(id)
+                window.location.href = '/gangs'
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 })
 </script>
