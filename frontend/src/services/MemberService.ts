@@ -8,3 +8,7 @@ export const createMember = async (member: Member) => {
 export const getMembers = async () => {
     return await axios.get('/members')
 }
+
+export const getMember = async (id: string) => {
+    return await axios.get(`/members/${id}`)
+}
