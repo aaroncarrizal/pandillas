@@ -8,3 +8,7 @@ export const createGang = async (gang: Gang) => {
 export const getGangs = async () => {
     return await axios.get('/gangs')
 }
+
+export const getGang = async (id: string) => {
+    return await axios.get(`/gangs/${id}`)
+}
