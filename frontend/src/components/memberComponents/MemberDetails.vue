@@ -7,7 +7,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h1 class="card-title">{{ member.name }}</h1>
+                                    <h1 class="card-title">{{ getFullName(member) }}</h1>
                                 </div>
                             </div>
                             <div class="row">
@@ -50,7 +50,7 @@ export default defineComponent({
             memberId: ''
         }
     },
-    mounted(){
+    created(){
         this.memberId = this.$route.params.id.toString()
         this.loadMember(this.memberId)
     },
@@ -63,6 +63,9 @@ export default defineComponent({
                 console.log(err)
             }
         },
+        getFullName(member: Member){
+            return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
+        }
     }
 })
 </script>

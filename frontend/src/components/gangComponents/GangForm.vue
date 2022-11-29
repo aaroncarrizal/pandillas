@@ -17,7 +17,7 @@
                         <label for="leader" class="form-label">Líder</label>
                         <select id="leader" class="form-select" aria-label="Default select example" v-model="gang.leader">
                             <template v-for="(member, index) in members" :key="index">
-                                <option :value="member._id">{{ member.name }}</option>
+                                <option :value="member._id">{{ getFullName(member) }}</option>
                             </template>
                         </select>
                     </div>
@@ -130,6 +130,9 @@ export default defineComponent({
                 console.log(err)
             }
         },
+        getFullName(member: Member){
+            return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
+        }
     }
 })
 </script>

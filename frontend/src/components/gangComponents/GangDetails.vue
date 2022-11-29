@@ -45,7 +45,7 @@
                                     <ul class="list-group list-group-flush">
                                         <template v-for="(member,i) in gang.members" :key="i">
                                             <li class="list-group-item">
-                                                {{ member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName }}
+                                                {{ getFullName(member) }}
                                             </li>
                                         </template>
                                     </ul>
@@ -136,6 +136,9 @@ export default defineComponent({
             } catch (error) {
                 console.log(error)
             }
+        },
+        getFullName(member: Member){
+            return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
         }
     }
 })
