@@ -1,5 +1,6 @@
 import { Router } from "express"
 import Member from '../models/Member'
+import Gang from '../models/Gang'
 const router = Router()
 
 
@@ -21,6 +22,12 @@ router.post('/members', async (req, res) => {
             throw 'gangId should not be null'
         }
             await member.save()
+            const gang = await Gang.findById(member.gangId)
+            if(gang){
+                gang.members.push(member.id)
+                gang.numMembers = gang.members.length
+                gang.save()
+            }
             res.json(member)
     } catch (error) {
         res.send(error)
