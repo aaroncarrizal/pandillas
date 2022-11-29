@@ -27,7 +27,7 @@
                             <label for="uasername">URL red social</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="birthdate" required >
+                            <input type="date" class="form-control" id="birthdate" required v-model="member.birthdate" >
                             <label for="birthdate">Fecha de nacimiento</label>
                         </div>
                         <label for="gangId" class="form-label">Pandilla</label>
