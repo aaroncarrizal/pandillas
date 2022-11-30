@@ -55,7 +55,7 @@
                                     <ul class="list-group list-group-flush">
                                         <template v-for="(rivalrie,i) in gang.rivalries" :key="i">
                                             <li class="list-group-item">
-                                                {{ rivalrie }}
+                                                {{ rivalrie.name }}
                                             </li>
                                         </template>
                                     </ul>
@@ -65,7 +65,7 @@
                                     <ul class="list-group list-group-flush">
                                         <template v-for="(alliance,i) in gang.alliances" :key="i">
                                             <li class="list-group-item">
-                                                {{ alliance }}
+                                                {{ alliance.name }}
                                             </li>
                                         </template>
                                     </ul>
