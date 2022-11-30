@@ -64,7 +64,6 @@
                 <div class="col-8">
                     <div class="d-grid gap-2">
                         <button class="btn btn-success" type="submit">Registrar</button>
-                        <button class="btn btn-secondary" type="submit">Limpiar</button> <!--Ojo-->
                     </div>
                 </div>
             </div>
@@ -95,6 +94,7 @@ export default defineComponent({
             try {
                 const res = await createMember(this.member)
                 console.log(res)
+                window.location.href = `/members`
             } catch (err) {
                 console.log(err)
             }

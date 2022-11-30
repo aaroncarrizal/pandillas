@@ -110,6 +110,7 @@ export default defineComponent({
             try {
                 const res = await createGang(this.gang)
                 console.log(res)
+                window.location.href = `/gangs`
             } catch (err) {
                 console.log(err)
             }

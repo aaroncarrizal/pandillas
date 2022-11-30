@@ -117,6 +117,7 @@ export default defineComponent({
             try {
                 const res = await updateGang(this.gangId,this.gang)
                 console.log(res)
+                window.location.href = `/gangs/${this.gangId}`
             } catch (err) {
                 console.log(err)
             }
