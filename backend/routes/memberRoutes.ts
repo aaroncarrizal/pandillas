@@ -37,7 +37,7 @@ router.post('/members', async (req, res) => {
 // Get one member
 router.get('/members/:id', async (req, res) => {
     try {
-        const member = await Member.findById(req.params.id)
+        const member = await Member.findById(req.params.id).populate('crimes')
         res.send(member)
     } catch (error) {
         res.status(404).send(error)
