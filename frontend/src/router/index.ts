@@ -66,9 +66,9 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/placeComponents/PlaceForm.vue')
     },
     {
-        path: '/places/edit/:id',
-        name: 'places-edit',
-        component: () => import('@/components/placeComponents/PlaceEdit.vue')
+        path: '/places/:id',
+        name: 'places-details',
+        component: () => import('@/components/placeComponents/PlaceDetails.vue')
     },
     {
         path: '/places/edit/:id',
