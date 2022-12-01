@@ -29,8 +29,9 @@
                                 </div>
                             </div>
                             <div class="row my-3">
+                                <h5>Peligrosidad</h5>
                                 <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar" role="progressbar" :style="`width: ${gang.dangerousness}%;`"></div>
+                                    <div class="progress-bar" role="progressbar" :style="`width: ${gang.dangerousness*33.33}%;`"></div>
                                 </div>
                             </div>
                             <a :href="'/gangs/' + gang._id" class="btn btn-primary">Ver detalles</a>
