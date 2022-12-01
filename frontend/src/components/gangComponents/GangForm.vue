@@ -14,12 +14,12 @@
                             <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea" v-model="gang.description" required></textarea>
                             <label for="floatingTextarea">Descripción</label>
                         </div>
-                        <label for="leader" class="form-label">Líder</label>
+                        <!-- <label for="leader" class="form-label">Líder</label>
                         <select id="leader" class="form-select" aria-label="Default select example" v-model="gang.leader">
                             <template v-for="(member, index) in members" :key="index">
                                 <option :value="member._id">{{ getFullName(member) }}</option>
                             </template>
-                        </select>
+                        </select> -->
                     </div>
                 </div>
                 <div class="col-md-4">
