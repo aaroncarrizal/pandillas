@@ -33,7 +33,7 @@
                                     <ul class="list-group list-group-flush">
                                         <template v-for="(crime,i) in member.crimes" :key="i">
                                             <li class="list-group-item">
-                                                {{ crime }}
+                                                {{ crime['name'] }}
                                             </li>
                                         </template>
                                     </ul>
