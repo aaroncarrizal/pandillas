@@ -23,15 +23,12 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p class="h5 text-center my-4">Ubicación</p>
-                    <!-- <div class="my-3">
-                        <input class="form-control my-1" placeholder="Calle" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Número" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Colonia" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Código Postal" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Entre calle y calle" v-model="gang.name"> 
-                    </div> -->
-                    seleccionar de las que ya estan
+                    <p class="h5 text-center my-4">Lugar de reunión</p>
+                    <select class="form-select" aria-label="multiple select example" v-model="gang.alliances">
+                        <template v-for="(place, index) in places" :key="index">
+                            <option :value="place._id">{{ place.description }}</option>
+                        </template>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <p class="h5 text-center my-4">Delitos asociados</p>
@@ -91,6 +88,7 @@ import { getGangs } from '@/services/GangService'
 import { getMembers} from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
 import { Place } from '@/interfaces/Place'
+import { getPlaces } from '@/services/PlaceService'
 import { Crime } from '@/interfaces/Crime'
 
 export default defineComponent({
@@ -98,12 +96,14 @@ export default defineComponent({
         return {
             gang: {} as Gang,
             gangs: [] as Gang[],
-            members: [] as Member[]
+            members: [] as Member[],
+            places: [] as Place[]
         }
     },
     mounted(){
         this.loadMembers()
         this.loadGangs()
+        this.loadPlaces()
     },
     methods: {
         async saveGang(){
@@ -127,6 +127,14 @@ export default defineComponent({
             try {
                 const res = await getGangs()
                 this.gangs = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async loadPlaces(){
+            try {
+                const res = await getPlaces()
+                this.places = res.data
             } catch (err) {
                 console.log(err)
             }
