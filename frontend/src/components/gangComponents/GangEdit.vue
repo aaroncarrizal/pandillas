@@ -16,8 +16,8 @@
                         </div>
                         <label for="leader" class="form-label">Líder</label>
                         <select id="leader" class="form-select" aria-label="Default select example" v-model="gang.leader">
-                            <template v-for="(member, index) in members" :key="index">
-                                <option :value="member._id">{{ getFullName(member) }}</option>
+                            <template v-for="(member, index) in gang.members" :key="index">
+                                <option :value="member['_id']">{{ getFullName(member) }}</option>
                             </template>
                         </select>
                     </div>
