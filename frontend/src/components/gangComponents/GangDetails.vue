@@ -37,8 +37,8 @@
                                 <div class="col-sm-2">
                                     <h5>Peligrosidad: {{ gang.dangerousness }}</h5>
                                 </div>
-                                <div class="col-sm-6">
-                                    Lugar 
+                                <div class="col-sm-6" v-if="gang.reunionPlace">
+                                    <h5>{{ getFullAddress(gang.reunionPlace) }}</h5>
                                 </div>
                             </div>
                             <div class="row">
@@ -141,6 +141,9 @@ export default defineComponent({
         },
         getFullName(member: Member){
             return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
+        },
+        getFullAddress(place: Place){
+            return place.delegacy + ', ' + place.municipality + ', ' + place.suburb + ', ' + place.street + ' #' + place.number 
         }
     }
 })
