@@ -27,7 +27,7 @@ router.post('/gangs', async (req, res) => {
 // Get one gang
 router.get('/gangs/:id', async (req, res) => {
     try {
-        const gang = await Gang.findById(req.params.id).populate('crimes').populate('leader').populate('members').populate('rivalries').populate('alliances')
+        const gang = await Gang.findById(req.params.id).populate('reunionPlace').populate('crimes').populate('leader').populate('members').populate('rivalries').populate('alliances')
         res.send(gang)
     } catch (error) {
         res.status(404).send(error)
