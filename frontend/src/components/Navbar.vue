@@ -44,6 +44,15 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/places" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Crimenes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/crimes">Ver todos</a></li>
+                            <li><a class="dropdown-item" href="/crimes/new">Crear nuevo</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/users" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Usuarios
                         </a>
