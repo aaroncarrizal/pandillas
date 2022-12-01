@@ -6,5 +6,6 @@ export interface Place {
     street: string,
     number: number,
     postalCode: number,
-    description: string
+    description: string,
+    _id: string
 }
