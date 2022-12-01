@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <h3>{{ gang.description }}</h3>
-                                    <h4>{{ gang.leader }}</h4>
+                                    <h4>{{ getFullName(gang.leader) }}</h4>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="d-grid gap-2">
@@ -107,7 +107,7 @@ export default defineComponent({
             gangId: ''
         }
     },
-    mounted(){
+    beforeMount(){
         this.gangId = this.$route.params.id.toString()
         this.loadMembers()
         this.loadGang(this.gangId)

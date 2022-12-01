@@ -6,7 +6,7 @@ const router = Router()
 // Get all gangs
 router.get('/gangs', async (req, res) => {
     try {
-        const gangs = await Gang.find()
+        const gangs = await Gang.find().populate('rivalries').populate('alliances')
         res.send(gangs)
     } catch (error) {
         res.send(error)
@@ -27,7 +27,7 @@ router.post('/gangs', async (req, res) => {
 // Get one gang
 router.get('/gangs/:id', async (req, res) => {
     try {
-        const gang = await Gang.findById(req.params.id).populate('members').populate('rivalries').populate('alliances')
+        const gang = await Gang.findById(req.params.id).populate('leader').populate('members').populate('rivalries').populate('alliances')
         res.send(gang)
     } catch (error) {
         res.status(404).send(error)

@@ -15,7 +15,7 @@
                                     <h5>Alianzas</h5>
                                     <ul>
                                         <li v-for="(alliance,i) in gang.alliances" :key="i">
-                                            {{ alliance }}
+                                            {{ alliance['name'] }}
                                         </li>
                                     </ul>
                                 </div>
@@ -23,7 +23,7 @@
                                     <h5>Rivalidades</h5>
                                     <ul>
                                         <li v-for="(rivalrie,i) in gang.rivalries" :key="i">
-                                            {{ rivalrie }}
+                                            {{ rivalrie['name'] }}
                                         </li>
                                     </ul>
                                 </div>
