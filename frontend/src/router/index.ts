@@ -56,6 +56,26 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/crimeComponents/CrimeForm.vue')
     },
     {
+        path: '/places',
+        name: 'places',
+        component: () => import('@/components/placeComponents/PlaceList.vue')
+    },
+    {
+        path: '/places/new',
+        name: 'places-new',
+        component: () => import('@/components/placeComponents/PlaceForm.vue')
+    },
+    {
+        path: '/places/edit/:id',
+        name: 'places-edit',
+        component: () => import('@/components/placeComponents/PlaceEdit.vue')
+    },
+    {
+        path: '/places/edit/:id',
+        name: 'places-edit',
+        component: () => import('@/components/placeComponents/PlaceEdit.vue')
+    },
+    {
         path: '/faq',
         name: 'faq',
         component: () => import('@/components/FaqPage.vue')
