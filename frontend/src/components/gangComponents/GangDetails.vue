@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <h3>{{ gang.description }}</h3>
-                                    <h4>{{ getFullName(gang.leader) }}</h4>
+                                    <!-- <h4>{{ getFullName(gang.leader.nsme) }}</h4> -->
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="d-grid gap-2">
@@ -45,7 +45,7 @@
                                     <ul class="list-group list-group-flush">
                                         <template v-for="(member,i) in gang.members" :key="i">
                                             <li class="list-group-item">
-                                                {{ getFullName(member) }}
+                                                <!-- {{ getFullName(member) }} -->
                                             </li>
                                         </template>
                                     </ul>
