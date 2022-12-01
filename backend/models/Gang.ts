@@ -12,7 +12,7 @@ const gangSchema = new Schema({
     },
     leader: {
         type: Types.ObjectId,
-        ref: "User"
+        ref: "Member"
     },
     members: {
         type: [Types.ObjectId],
