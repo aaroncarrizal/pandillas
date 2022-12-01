@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        {{member}}
         <div class="row">
             <div class="col-4-sm-12 my-4">
                     <div class="card">
