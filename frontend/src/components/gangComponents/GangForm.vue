@@ -24,26 +24,19 @@
                 </div>
                 <div class="col-md-4">
                     <p class="h5 text-center my-4">Lugar de reunión</p>
-                    <select class="form-select" aria-label="multiple select example" v-model="gang.alliances">
+                    <select class="form-select" aria-label="multiple select example" v-model="gang.reunionPlace">
                         <template v-for="(place, index) in places" :key="index">
                             <option :value="place._id">{{ place.description }}</option>
                         </template>
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <p class="h5 text-center my-4">Delitos asociados</p>
-                    <!-- <div class="my-3">
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a persona</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a vehículo</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a casa habitación</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a comercio</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a repartidores</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Narcomenudeo</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Extorsiones</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Otros Delitos</div>
-                    </div> -->
-                    Lista de los que ya existen
+                    <p class="h5 text-center my-4">Crimenes asociados</p>
+                    <select class="form-select" multiple aria-label="select" v-model="gang.crimes">
+                        <template v-for="(crime, index) in crimes" :key="index">
+                            <option :value="crime._id">{{ crime.name }}</option>
+                        </template>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -90,6 +83,7 @@ import { Member } from '@/interfaces/Member'
 import { Place } from '@/interfaces/Place'
 import { getPlaces } from '@/services/PlaceService'
 import { Crime } from '@/interfaces/Crime'
+import { getCrimes } from '@/services/CrimeService'
 
 export default defineComponent({
     data() {
@@ -97,13 +91,15 @@ export default defineComponent({
             gang: {} as Gang,
             gangs: [] as Gang[],
             members: [] as Member[],
-            places: [] as Place[]
+            places: [] as Place[],
+            crimes: [] as Crime[]
         }
     },
-    mounted(){
+    beforeMount(){
         this.loadMembers()
         this.loadGangs()
         this.loadPlaces()
+        this.loadCrimes()
     },
     methods: {
         async saveGang(){
@@ -135,6 +131,14 @@ export default defineComponent({
             try {
                 const res = await getPlaces()
                 this.places = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async loadCrimes(){
+            try {
+                const res = await getCrimes()
+                this.crimes = res.data
             } catch (err) {
                 console.log(err)
             }
