@@ -42,6 +42,16 @@
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-center my-3">
+                <div class="col-6 text-break">
+                    <p class="fw-light text-center">
+                        ¿No cuentas con tus licencias para entrar?<br>
+                        Acúde con un administrador del sitio
+                    </p>
+                    <p class="fw-light text-center">o</p>
+                    <p class="fw-light text-center">Ingresa como <a @click="loginAsCitizen()" href="#">Ciudadano</a></p>
+                </div>
+            </div>
         </form>
     </div>
 </template>
@@ -55,7 +65,8 @@ export default defineComponent({
     data(){
         return {
             user: {} as User,
-            token: ''
+            token: '',
+            role: 0
         }
     },
     methods:{
@@ -64,14 +75,19 @@ export default defineComponent({
                 const res = await loginUser(this.user);
                 if(res.data.accessToken){
                     this.token = res.data.accessToken
-                    this.$emit('loggedIn', this.token)
-                    router.push({ path: '/gangs', params:{ token: this.token }})
+                    this.role = res.data.role
+                    this.$emit('loggedIn', this.token, this.role)
+                    router.push({ path: '/gangs' })
                 }else{
                     console.log("No sirve")
                 }
             } catch (err) {
                 console.log(err)
             }
+        },
+        async loginAsCitizen(){
+            this.$emit('loggedIn', '', 0)
+            router.push({ path: '/gangs' })
         },
     },
 })

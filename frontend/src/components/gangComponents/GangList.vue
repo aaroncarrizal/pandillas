@@ -49,6 +49,10 @@ import { getGangs } from '@/services/GangService'
 import { Gang } from '@/interfaces/Gang'
 
 export default defineComponent({
+    props:{
+        role: Number,
+        token: String
+    },
     data(){
         return {
             gangs: [] as Gang[]

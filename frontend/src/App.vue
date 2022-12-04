@@ -1,6 +1,6 @@
 <template>
     <Navbar v-if="!isOnLoginScreen()"/>
-    <router-view @loggedIn="changeToken"></router-view>
+    <router-view @loggedIn="changeToken" :role="role" :token="token"></router-view>
 </template>
 
 <script lang="ts">
@@ -14,15 +14,17 @@ export default defineComponent({
     },
     data(){
         return {
-        token: ''
+        token: '',
+        role: 0
         }
     },
     methods:{
         isOnLoginScreen(){
             return this.$route.path === '/'
         },
-        changeToken(newToken: string){
+        changeToken(newToken: string, newRole: number){
             this.token = newToken
+            this.role = newRole
         },
     }
 });
