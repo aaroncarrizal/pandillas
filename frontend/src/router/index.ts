@@ -76,6 +76,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/FaqPage.vue')
     },
     {
+        path: '/home',
+        name: 'home-citizen',
+        component: () => import('@/components/HomePage.vue')
+    },
+    {
         path: '/report',
         name: 'generate-report',
         component: () => import('@/components/GenerateReport.vue')

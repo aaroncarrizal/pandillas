@@ -87,7 +87,7 @@ export default defineComponent({
         },
         async loginAsCitizen(){
             this.$emit('loggedIn', '', 0)
-            router.push({ path: '/gangs' })
+            router.push({ path: '/home' })
         },
     },
 })
