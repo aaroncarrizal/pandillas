@@ -20,6 +20,10 @@
                                 <option :value="member['_id']">{{ getFullName(member) }}</option>
                             </template>
                         </select>
+                        <div class="form-floating my-3">
+                            <input type="number" class="form-control" id="name" v-model="gang.ageAverage" placeholder="promedio">
+                            <label for="name">Promedio de edades</label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
