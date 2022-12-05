@@ -22,9 +22,11 @@ router.post('/members', async (req, res) => {
             throw 'gangId should not be null'
         }
             await member.save()
-            const gang = await Gang.findById(member.gangId)
+            let gang = await Gang.findById(member.gangId)
             if(gang){
+                // Add member to gang
                 gang.members.push(member.id)
+                // Increase number of members
                 gang.numMembers = gang.members.length
                 gang.save()
             }
