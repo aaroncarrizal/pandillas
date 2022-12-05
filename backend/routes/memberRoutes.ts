@@ -49,7 +49,35 @@ router.get('/members/:id', async (req, res) => {
 // Edit one member
 router.patch('/members/:id', async (req, res) => {
     try {
+        const oldMember = await Member.findById(req.params.id)
         const updatedMember = await Member.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        // If member changed gang
+        if(oldMember?.gangId != updatedMember?.gangId){
+            let oldGang = await Gang.findById(oldMember?.gangId)
+            if(oldGang && oldMember && updatedMember){
+                // If member was the leader
+                if(oldGang.leader == oldMember.id){
+                    oldGang.leader = undefined
+                }
+                // Delete member from oldGang
+                for(let i = 0; i < oldGang.members.length; i++){
+                    if(oldGang.members[i].toString() == oldMember.id){
+                        oldGang.members.splice(i,1)
+                    }
+                }
+                oldGang.numMembers = oldGang.members.length
+                await oldGang.save()
+                // Add member to new gang
+                let newGang = await Gang.findById(updatedMember.gangId)
+                if(newGang){
+                    // Add member to gang
+                    newGang.members.push(updatedMember.id)
+                    // Increase number of members
+                    newGang.numMembers = newGang.members.length
+                    await newGang.save()
+                }
+            }
+        }
         res.send(updatedMember)
     } catch (error) {
         res.send(error)
