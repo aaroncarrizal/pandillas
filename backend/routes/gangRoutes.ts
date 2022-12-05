@@ -1,5 +1,6 @@
 import { Router } from "express"
 import Gang from '../models/Gang'
+import Member from "../models/Member"
 const router = Router()
 
 
@@ -48,6 +49,12 @@ router.patch('/gangs/:id', async (req, res) => {
 router.delete('/gangs/:id', async (req, res) => {
     try {
         const gang = await Gang.findByIdAndDelete(req.params.id)
+        // Cascade deletion for members of the gang
+        if(gang){
+            for (const member of gang.members) {
+                await Member.findByIdAndDelete(member)
+            }
+        }
         res.send(gang)
     } catch (error) {
         res.status(404).send(error)
