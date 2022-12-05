@@ -1,5 +1,5 @@
 <template>
-    <Navbar v-if="!isOnLoginScreen()"/>
+    <Navbar v-if="!isOnLoginScreen()" :role="role"/>
     <router-view @loggedIn="changeToken" :role="role" :token="token"></router-view>
 </template>
 
