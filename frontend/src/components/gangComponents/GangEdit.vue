@@ -28,11 +28,52 @@
                 </div>
                 <div class="col-md-4">
                     <p class="h5 text-center my-4">Lugar de reunión</p>
-                    <select class="form-select" aria-label="multiple select example" v-model="gang.reunionPlace">
-                        <template v-for="(place, index) in places" :key="index">
-                            <option :value="place._id">{{ place.description }}</option>
-                        </template>
-                    </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="municipality" v-model="place.municipality" placeholder="Nombre" required>
+                                <label for="municipality">Municipalidad</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="delegacy" v-model="place.delegacy" placeholder="Nombre" required>
+                                <label for="delegacy">Delegación</label>
+                            </div>
+                            <label for="leader" class="form-label">Localidad</label>
+                            <select id="leader" class="form-select" aria-label="Default select example" v-model="place.locality" required>
+                                <option value="Norte">Norte</option>
+                                <option value="Sur">Sur</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Este">Este</option>
+                                <option value="Oeste">Oeste</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="suburb" v-model="place.suburb" placeholder="Nombre">
+                                    <label for="suburb">Colonia</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="street" v-model="place.street" placeholder="Nombre">
+                                    <label for="street">Calle</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="number" v-model="place.number" placeholder="Nombre">
+                                    <label for="number">Número</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="postalCode" v-model="place.postalCode" placeholder="Nombre">
+                                    <label for="postalCode">Código Postal</label>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="description" v-model="place.description" placeholder="Nombre">
+                                    <label for="description">Descripción</label>
+                                </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <p class="h5 text-center my-4">Crimenes asociados</p>
@@ -86,9 +127,11 @@ import { getGangs } from '@/services/GangService'
 import { Member } from '@/interfaces/Member'
 import { getMembers} from '@/services/MemberService'
 import { Place } from '@/interfaces/Place'
-import { getPlaces } from '@/services/PlaceService'
+import { updatePlace } from '@/services/PlaceService'
+import { getPlace } from '@/services/PlaceService'
 import { Crime } from '@/interfaces/Crime'
 import { getCrimes } from '@/services/CrimeService'
+import router from '@/router'
 
 export default defineComponent({
     data() {
@@ -97,16 +140,16 @@ export default defineComponent({
             gangs: [] as Gang[],
             members: [] as Member[],
             gangId: '',
-            places: [] as Place[],
+            place: {} as Place,
             crimes: [] as Crime[]
         }
     },
-    beforeMount(){
+    async beforeMount(){
         this.gangId = this.$route.params.id.toString()
-        this.loadMembers()
-        this.loadGang(this.gangId)
-        this.loadPlaces()
-        this.loadCrimes()
+        await this.loadMembers()
+        await this.loadGang(this.gangId)
+        await this.loadPlace(this.gang.reunionPlace._id)
+        await this.loadCrimes()
     },
     mounted(){
         this.loadMembers()
@@ -115,9 +158,18 @@ export default defineComponent({
     methods: {
         async editGang(){
             try {
+                await this.editPlace()
                 const res = await updateGang(this.gangId,this.gang)
                 console.log(res)
-                window.location.href = `/gangs/${this.gangId}`
+                router.push(`/gangs/${this.gangId}`)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async editPlace(){
+            try {
+                const res = await updatePlace(this.gang.reunionPlace._id,this.place)
+                console.log(res)
             } catch (err) {
                 console.log(err)
             }
@@ -146,10 +198,10 @@ export default defineComponent({
                 console.log(err)
             }
         },
-        async loadPlaces(){
+        async loadPlace(id: string){
             try {
-                const res = await getPlaces()
-                this.places = res.data
+                const res = await getPlace(id)
+                this.place = res.data
             } catch (err) {
                 console.log(err)
             }

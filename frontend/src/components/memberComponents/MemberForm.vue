@@ -3,7 +3,7 @@
         <p class="h1 text-center">Registro de integrante</p>
         <form @submit.prevent="saveMember()">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <p class="h5 text-center my-4">Datos principales</p>
                     <div class="my-3">
                         <div class="form-floating mb-3">
@@ -38,13 +38,54 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <p class="h5 text-center my-4">Domicilio</p>
-                    <select class="form-select" aria-label="multiple select example" v-model="member.residence">
-                        <template v-for="(place, index) in places" :key="index">
-                            <option :value="place._id">{{ place.description }}</option>
-                        </template>
-                    </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="municipality" v-model="place.municipality" placeholder="Nombre" required>
+                                <label for="municipality">Municipalidad</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="delegacy" v-model="place.delegacy" placeholder="Nombre" required>
+                                <label for="delegacy">Delegación</label>
+                            </div>
+                            <label for="leader" class="form-label">Localidad</label>
+                            <select id="leader" class="form-select" aria-label="Default select example" v-model="place.locality" required>
+                                <option value="Norte">Norte</option>
+                                <option value="Sur">Sur</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Este">Este</option>
+                                <option value="Oeste">Oeste</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="suburb" v-model="place.suburb" placeholder="Nombre">
+                                    <label for="suburb">Colonia</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="street" v-model="place.street" placeholder="Nombre">
+                                    <label for="street">Calle</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="number" v-model="place.number" placeholder="Nombre">
+                                    <label for="number">Número</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="postalCode" v-model="place.postalCode" placeholder="Nombre">
+                                    <label for="postalCode">Código Postal</label>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="description" v-model="place.description" placeholder="Nombre">
+                                    <label for="description">Descripción</label>
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -74,30 +115,40 @@ import { Member } from '@/interfaces/Member'
 import { Gang } from '@/interfaces/Gang'
 import { getGangs } from '@/services/GangService'
 import { Place } from '@/interfaces/Place'
-import { getPlaces } from '@/services/PlaceService'
+import { createPlace } from '@/services/PlaceService'
 import { Crime } from '@/interfaces/Crime'
 import { getCrimes } from '@/services/CrimeService'
+import router from '@/router'
 
 export default defineComponent({
     data() {
         return {
             member: {name:{}} as Member,
             gangs: [] as Gang[],
-            places: [] as Place[],
+            place: {} as Place,
             crimes: [] as Crime[]
         }
     },
     beforeMount(){
         this.loadGangs()
-        this.loadPlaces()
         this.loadCrimes()
     },
     methods: {
         async saveMember(){
             try {
+                let placeId = await this.savePlace()
+                this.member.residence = placeId
                 const res = await createMember(this.member)
                 console.log(res)
-                window.location.href = `/members`
+                router.push(`/members`)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async savePlace(){
+            try {
+                const res = await createPlace(this.place)
+                return res.data._id
             } catch (err) {
                 console.log(err)
             }
@@ -106,14 +157,6 @@ export default defineComponent({
             try {
                 const res = await getGangs()
                 this.gangs = res.data
-            } catch (err) {
-                console.log(err)
-            }
-        },
-        async loadPlaces(){
-            try {
-                const res = await getPlaces()
-                this.places = res.data
             } catch (err) {
                 console.log(err)
             }
