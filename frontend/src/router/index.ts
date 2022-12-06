@@ -71,26 +71,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/placeComponents/PlaceEdit.vue')
     },
     {
-        path: '/faq',
-        name: 'faq',
-        component: () => import('@/components/FaqPage.vue')
-    },
-    {
-        path: '/home',
-        name: 'home-citizen',
-        component: () => import('@/components/HomePage.vue')
-    },
-    {
-        path: '/report',
-        name: 'generate-report',
-        component: () => import('@/components/GenerateReport.vue')
-    },
-    {
-        path: '/user',
-        name: 'user-config',
-        component: () => import('@/components/UserConfig.vue')
-    },
-    {
         path: '/users',
         name: 'users-list',
         component: () => import('@/components/UsersList.vue')
@@ -99,7 +79,17 @@ const routes: RouteRecordRaw[] = [
         path: '/users/new',
         name: 'users-new',
         component: () => import('@/components/UserForm.vue')
-    }
+    },
+    {
+        path: '/home',
+        name: 'home-citizen',
+        component: () => import('@/components/HomePage.vue')
+    },
+    {
+        path: '/help',
+        name: 'help-form',
+        component: () => import('@/components/HelpForm.vue')
+    },
 ]
 
 const router = createRouter({
