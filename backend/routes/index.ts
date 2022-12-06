@@ -12,7 +12,7 @@ router.get('/send',(req, res) => {
         service: 'gmail',
         auth: {
             user: 'aaronk4572@gmail.com',
-            pass: 'fqpjfcawxlciltkn',
+            pass: process.env.PASSWORD,
         },
         tls: {
             rejectUnauthorized: false
