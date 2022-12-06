@@ -4,12 +4,10 @@ const placeSchema = new Schema({
     municipality: {
         type: String,
         trim: true,
-        required: true
     },
     delegacy: {
         type: String,
         trim: true,
-        required: true
     },
     locality: {
         type: String,
@@ -19,26 +17,21 @@ const placeSchema = new Schema({
     suburb: {
         type: String,
         trim: true,
-        required: true
     },
     street: {
         type: String,
         trim: true,
-        required: true
     },
     number: {
         type: Number,
-        required: true
     },
     postalCode: {
         type: Number,
-        required: true
     },
     description: {
         type: String,
         trim: true
-    }
-
+    },
 })
 
 export default model('Place', placeSchema)
