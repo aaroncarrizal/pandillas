@@ -49,7 +49,7 @@
                         Acúde con un administrador del sitio
                     </p>
                     <p class="fw-light text-center">o</p>
-                    <p class="fw-light text-center">Ingresa como <a @click="loginAsCitizen()" href="#">Ciudadano</a></p>
+                    <p class="fw-light text-center">Ingresa como <router-link @click="loginAsCitizen()" to="#">Ciudadano</router-link></p>
                 </div>
             </div>
         </form>
