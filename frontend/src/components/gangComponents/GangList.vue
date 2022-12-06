@@ -34,7 +34,7 @@
                                     <div class="progress-bar" role="progressbar" :style="`width: ${gang.dangerousness*33.33}%;`"></div>
                                 </div>
                             </div>
-                            <a :href="'/gangs/' + gang._id" class="btn btn-primary">Ver detalles</a>
+                            <router-link :to="'/gangs/' + gang._id" class="btn btn-primary">Ver detalles</router-link>
                         </div>
                     </div>
                 </div>

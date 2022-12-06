@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="d-grid gap-2">
-                                        <a :href="`/gangs/edit/${gangId}`" class="btn btn-primary" role="button">Editar</a>
+                                        <router-link :to="`/gangs/edit/${gangId}`" class="btn btn-primary" role="button">Editar</router-link>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
