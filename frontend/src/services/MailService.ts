@@ -8,3 +8,9 @@ export const sendEmail = async (mailData: Mail) => {
 export const generatePDF = async (gangIds: string[]) => {
     return await axios.post('/pdf', gangIds)
 }
+
+export const downloadPDF = async () => {
+    return await axios.get('/downloadPdf',{
+        responseType: 'blob'
+    })
+}

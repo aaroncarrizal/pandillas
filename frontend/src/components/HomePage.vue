@@ -77,7 +77,7 @@ import { getGangs } from '@/services/GangService'
 import { Gang } from '@/interfaces/Gang'
 import { getGang } from '@/services/GangService'
 import { Member } from '@/interfaces/Member'
-import { generatePDF } from '@/services/MailService'
+import { downloadPDF, generatePDF } from '@/services/MailService'
 
 export default defineComponent({
     data(){
@@ -136,10 +136,9 @@ export default defineComponent({
         async generateReport(){
             try {
                 const res = await generatePDF(this.newGangsIds)
-                console.log(res)
-                // const blob = new Blob([res.data], { type: "application/pdf" })
-                // let blobUrl = URL.createObjectURL(blob);
-                // window.open('../../../backend/fileserver/reporte.pdf')
+                if(res.data == "success"){
+                    window.location.replace('http://localhost:3000/api/downloadPdf')
+                }
             } catch (error) {
                 console.log(error)
             }

@@ -246,12 +246,7 @@ router.post('/pdf', async (req,res) => {
     // res.contentType("application/pdf")
     // res.send(data)
 
-    const file = fs.createReadStream(path.join(__dirname, `../fileserver/reporte.pdf`));
-    const stat = fs.statSync(path.join(__dirname, `../fileserver/reporte.pdf`));
-    res.setHeader('Content-Length', stat.size);
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-    file.pipe(res);
+    res.send("success")
 
     // Delete files
     // fs.readdir(path.join(__dirname, `../fileserver/`), (err, files) => {
@@ -262,5 +257,11 @@ router.post('/pdf', async (req,res) => {
     //         });
     //     }
     // });
+})
+
+router.get('/downloadPdf', async (req,res) => {
+    console.log(path.join(__dirname, `../fileserver/reporte.pdf`))
+    const file = path.join(__dirname, `../fileserver/reporte.pdf`)
+    res.download(file);
 })
 export default router
