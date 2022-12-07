@@ -133,7 +133,7 @@ export default defineComponent({
                 console.log(res)
                 // const blob = new Blob([res.data], { type: "application/pdf" })
                 // let blobUrl = URL.createObjectURL(blob);
-                window.open('../../../backend/fileserver/reporte.pdf')
+                // window.open('../../../backend/fileserver/reporte.pdf')
             } catch (error) {
                 console.log(error)
             }
