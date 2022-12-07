@@ -130,6 +130,10 @@ export default defineComponent({
         async generateReport(){
             try {
                 const res = await generatePDF(this.newGangsIds)
+                console.log(res)
+                // const blob = new Blob([res.data], { type: "application/pdf" })
+                // let blobUrl = URL.createObjectURL(blob);
+                window.open('../../../backend/fileserver/reporte.pdf')
             } catch (error) {
                 console.log(error)
             }
