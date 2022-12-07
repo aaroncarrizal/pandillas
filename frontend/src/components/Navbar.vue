@@ -1,9 +1,9 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-light mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/home">
+            <router-link class="navbar-brand" to="/home">
                 <img src="@/assets/favicon.png" width="30"/>
-            </a>
+            </router-link>
             <button 
                 class="navbar-toggler" 
                 type="button" 
@@ -17,41 +17,80 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/gangs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Pandillas
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/gangs">Ver todas</a></li>
-                            <li><a class="dropdown-item" href="/gangs/new">Crear nueva</a></li>
-                        </ul>
+                        <template v-if="(role == 2)">
+                            <router-link class="nav-link dropdown-toggle" to="/gangs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pandillas
+                            </router-link>
+                            <ul class="dropdown-menu">
+                                <li><router-link class="dropdown-item" to="/gangs">Ver todas</router-link></li>
+                                <li><router-link class="dropdown-item" to="/gangs/new">Crear nueva</router-link></li>
+                            </ul>
+                        </template>
+                        <template v-else>
+                            <router-link class="nav-link" to="/gangs" role="button" aria-expanded="false">
+                                Pandillas
+                            </router-link>
+                        </template>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/members" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Miembros
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/members">Ver todos</a></li>
-                            <li><a class="dropdown-item" href="/members/new">Crear nuevo</a></li>
-                        </ul>
+                        <template v-if="(role == 2)">
+                            <router-link class="nav-link dropdown-toggle" to="/members" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Miembros
+                            </router-link>
+                            <ul class="dropdown-menu">
+                                <li><router-link class="dropdown-item" to="/members">Ver todos</router-link></li>
+                                <li><router-link class="dropdown-item" to="/members/new">Crear nuevo</router-link></li>
+                            </ul>
+                        </template>
+                        <template v-if="(role == 1)">
+                            <router-link class="nav-link" to="/members" role="button" aria-expanded="false">
+                                Miembros
+                            </router-link>
+                        </template>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/places" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Lugares
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/places">Ver todos</a></li>
-                            <li><a class="dropdown-item" href="/places/new">Crear nuevo</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/users" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Usuarios
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/users">Ver todos</a></li>
-                            <li><a class="dropdown-item" href="/users/new">Crear nuevo</a></li>
-                        </ul>
-                    </li>
+                    <template v-if="(role == 2)">
+                        <li class="nav-item dropdown">
+                            <router-link class="nav-link dropdown-toggle" to="/places" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Crimenes
+                            </router-link>
+                            <ul class="dropdown-menu">
+                                <li><router-link class="dropdown-item" to="/crimes">Ver todos</router-link></li>
+                                <li><router-link class="dropdown-item" to="/crimes/new">Crear nuevo</router-link></li>
+                            </ul>
+                        </li>
+                    </template>
+                    <template v-if="(role == 2)">
+                        <li class="nav-item dropdown">
+                            <router-link class="nav-link dropdown-toggle" to="/users" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </router-link>
+                            <ul class="dropdown-menu">
+                                <li><router-link class="dropdown-item" to="/users">Ver todos</router-link></li>
+                                <li><router-link class="dropdown-item" to="/users/new">Crear nuevo</router-link></li>
+                            </ul>
+                        </li>
+                    </template>
+                    <template v-if="(role == 0)">
+                        <li class="nav-item dropdown">
+                            <router-link class="nav-link dropdown-toggle" to="/help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ayuda
+                            </router-link>
+                            <ul class="dropdown-menu">
+                                <li><router-link class="dropdown-item" to="/help">Solicitar ayuda</router-link></li>
+                                <li><router-link class="dropdown-item" to="/faq">Preguntas frecuentes</router-link></li>
+                            </ul>
+                        </li>
+                    </template>
+                    <template v-if="(role != 0)">
+                        <router-link class="nav-link" to="#" @click="logOut()" role="button" aria-expanded="false">
+                            Cerrar sesión
+                        </router-link>
+                    </template>
+                    <template v-else>
+                        <router-link class="nav-link" to="/" role="button" aria-expanded="false">
+                            Iniciar sesión
+                        </router-link>
+                    </template>
                 </ul>
             </div>
         </div>
@@ -59,9 +98,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "vue"
+import router from '@/router'
 
 export default defineComponent({
+    props:{
+        role: Number
+    },
     name: "Nav-bar",
+    methods:{
+        logOut(){
+            this.$emit('loggedIn', '', 0)
+            router.push({ path: '/' })
+        }
+    }
 });
 </script>

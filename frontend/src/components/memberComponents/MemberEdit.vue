@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <p class="h1 text-center">Registro de integrante</p>
-        <form @submit.prevent="saveMember()">
+        <p class="h1 text-center">Editar a {{ getFullName(member) }}</p>
+        <form @submit.prevent="editMember()">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <p class="h5 text-center my-4">Datos principales</p>
                     <div class="my-3">
                         <div class="form-floating mb-3">
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p class="h5 text-center my-4">Domicilio</p>
                     <div class="row">
                         <div class="col-md-6">
@@ -98,10 +98,10 @@
                     </select>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center my-3">
                 <div class="col-8">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-success" type="submit">Registrar</button>
+                        <button class="btn btn-primary" type="submit">Editar</button>
                     </div>
                 </div>
             </div>
@@ -110,12 +110,14 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { createMember } from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
+import { getMember } from '@/services/MemberService'
+import { updateMember } from '@/services/MemberService'
 import { Gang } from '@/interfaces/Gang'
 import { getGangs } from '@/services/GangService'
 import { Place } from '@/interfaces/Place'
-import { createPlace } from '@/services/PlaceService'
+import { updatePlace } from '@/services/PlaceService'
+import { getPlace } from '@/services/PlaceService'
 import { Crime } from '@/interfaces/Crime'
 import { getCrimes } from '@/services/CrimeService'
 import router from '@/router'
@@ -123,32 +125,52 @@ import router from '@/router'
 export default defineComponent({
     data() {
         return {
-            member: {name:{}} as Member,
+            memberId: '',
+            member: {} as Member,
             gangs: [] as Gang[],
             place: {} as Place,
             crimes: [] as Crime[]
         }
     },
-    beforeMount(){
-        this.loadGangs()
+    async beforeMount(){
+        this.memberId = this.$route.params.id.toString()
+        await this.loadMember(this.memberId)
+        await this.loadPlace(this.member.residence._id)
         this.loadCrimes()
     },
+    mounted(){
+        this.loadGangs()
+    },
     methods: {
-        async saveMember(){
+        async editMember(){
             try {
-                let placeId = await this.savePlace()
-                this.member.residence = placeId
-                const res = await createMember(this.member)
-                console.log(res)
-                router.push(`/members`)
+                await this.editPlace()
+                const res = await updateMember(this.memberId,this.member)
+                router.push(`/members/${this.memberId}`)
             } catch (err) {
                 console.log(err)
             }
         },
-        async savePlace(){
+        async editPlace(){
             try {
-                const res = await createPlace(this.place)
-                return res.data._id
+                const res = await updatePlace(this.member.residence._id,this.place)
+                console.log(res)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async loadMember(id: string){
+            try {
+                const res = await getMember(id)
+                this.member = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async loadPlace(id: string){
+            try {
+                const res = await getPlace(id)
+                this.place = res.data
             } catch (err) {
                 console.log(err)
             }
@@ -169,6 +191,9 @@ export default defineComponent({
                 console.log(err)
             }
         },
+        getFullName(member: Member){
+            return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
+        }
     }
 })
 </script>

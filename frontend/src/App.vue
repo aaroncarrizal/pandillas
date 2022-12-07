@@ -1,11 +1,12 @@
 <template>
-    <Navbar v-if="!isOnLoginScreen()"/>
-    <router-view @loggedIn="changeToken"></router-view>
+    <Navbar v-if="!isOnLoginScreen()" :role="role"/>
+    <router-view @loggedIn="changeToken" :role="role" :token="token"></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Navbar from "@/components/Navbar.vue";
+import { defineComponent } from 'vue'
+import Navbar from "@/components/Navbar.vue"
+
 
 export default defineComponent({
     name: 'App',
@@ -14,15 +15,17 @@ export default defineComponent({
     },
     data(){
         return {
-        token: ''
+        token: '',
+        role: 0
         }
     },
     methods:{
         isOnLoginScreen(){
             return this.$route.path === '/'
         },
-        changeToken(newToken: string){
+        changeToken(newToken: string, newRole: number){
             this.token = newToken
+            this.role = newRole
         },
     }
 });

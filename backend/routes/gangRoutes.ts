@@ -1,12 +1,13 @@
 import { Router } from "express"
 import Gang from '../models/Gang'
+import Member from "../models/Member"
 const router = Router()
 
 
 // Get all gangs
 router.get('/gangs', async (req, res) => {
     try {
-        const gangs = await Gang.find()
+        const gangs = await Gang.find().populate('rivalries').populate('alliances').populate('leader').populate('reunionPlace')
         res.send(gangs)
     } catch (error) {
         res.send(error)
@@ -27,7 +28,7 @@ router.post('/gangs', async (req, res) => {
 // Get one gang
 router.get('/gangs/:id', async (req, res) => {
     try {
-        const gang = await Gang.findById(req.params.id)
+        const gang = await Gang.findById(req.params.id).populate('reunionPlace').populate('crimes').populate('leader').populate('members').populate('rivalries').populate('alliances')
         res.send(gang)
     } catch (error) {
         res.status(404).send(error)
@@ -48,6 +49,12 @@ router.patch('/gangs/:id', async (req, res) => {
 router.delete('/gangs/:id', async (req, res) => {
     try {
         const gang = await Gang.findByIdAndDelete(req.params.id)
+        // Cascade deletion for members of the gang
+        if(gang){
+            for (const member of gang.members) {
+                await Member.findByIdAndDelete(member)
+            }
+        }
         res.send(gang)
     } catch (error) {
         res.status(404).send(error)

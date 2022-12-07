@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/gangComponents/GangDetails.vue')
     },
     {
+        path: '/gangs/edit/:id',
+        name: 'gang-edit',
+        component: () => import('@/components/gangComponents/GangEdit.vue')
+    },
+    {
         path: '/members',
         name: 'members',
         component: () => import('@/components/memberComponents/MemberList.vue')
@@ -31,19 +36,39 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/components/memberComponents/MemberForm.vue')
     },
     {
-        path: '/faq',
-        name: 'faq',
-        component: () => import('@/components/FaqPage.vue')
+        path: '/members/:id',
+        name: 'members-details',
+        component: () => import('@/components/memberComponents/MemberDetails.vue')
     },
     {
-        path: '/report',
-        name: 'generate-report',
-        component: () => import('@/components/GenerateReport.vue')
+        path: '/members/edit/:id',
+        name: 'members-edit',
+        component: () => import('@/components/memberComponents/MemberEdit.vue')
     },
     {
-        path: '/user',
-        name: 'user-config',
-        component: () => import('@/components/UserConfig.vue')
+        path: '/crimes',
+        name: 'crimes',
+        component: () => import('@/components/crimeComponents/CrimeList.vue')
+    },
+    {
+        path: '/crimes/new',
+        name: 'crimes-new',
+        component: () => import('@/components/crimeComponents/CrimeForm.vue')
+    },
+    {
+        path: '/places',
+        name: 'places',
+        component: () => import('@/components/placeComponents/PlaceList.vue')
+    },
+    {
+        path: '/places/new',
+        name: 'places-new',
+        component: () => import('@/components/placeComponents/PlaceForm.vue')
+    },
+    {
+        path: '/places/edit/:id',
+        name: 'places-edit',
+        component: () => import('@/components/placeComponents/PlaceEdit.vue')
     },
     {
         path: '/users',
@@ -54,7 +79,17 @@ const routes: RouteRecordRaw[] = [
         path: '/users/new',
         name: 'users-new',
         component: () => import('@/components/UserForm.vue')
-    }
+    },
+    {
+        path: '/home',
+        name: 'home-citizen',
+        component: () => import('@/components/HomePage.vue')
+    },
+    {
+        path: '/help',
+        name: 'help-form',
+        component: () => import('@/components/HelpForm.vue')
+    },
 ]
 
 const router = createRouter({

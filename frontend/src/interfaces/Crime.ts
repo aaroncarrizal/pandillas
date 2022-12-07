@@ -1,3 +1,4 @@
 export interface Crime {
-    name: string
+    name: string,
+    _id: string
 }

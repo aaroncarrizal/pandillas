@@ -1,5 +1,5 @@
 import {Schema , model, Types} from 'mongoose'
-
+// import { Member } from './Member'
 const gangSchema = new Schema({
     name:{
         type: String,
@@ -12,11 +12,11 @@ const gangSchema = new Schema({
     },
     leader: {
         type: Types.ObjectId,
-        ref: "User"
+        ref: "Member"
     },
     members: {
         type: [Types.ObjectId],
-        ref: "User"
+        ref: "Member"
     },
     numMembers: {
         type: Number

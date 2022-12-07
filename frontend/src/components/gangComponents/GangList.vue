@@ -15,7 +15,7 @@
                                     <h5>Alianzas</h5>
                                     <ul>
                                         <li v-for="(alliance,i) in gang.alliances" :key="i">
-                                            {{ alliance }}
+                                            {{ alliance['name'] }}
                                         </li>
                                     </ul>
                                 </div>
@@ -23,17 +23,18 @@
                                     <h5>Rivalidades</h5>
                                     <ul>
                                         <li v-for="(rivalrie,i) in gang.rivalries" :key="i">
-                                            {{ rivalrie }}
+                                            {{ rivalrie['name'] }}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row my-3">
+                                <h5>Peligrosidad</h5>
                                 <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar" role="progressbar" :style="`width: ${gang.dangerousness}%;`"></div>
+                                    <div class="progress-bar" role="progressbar" :style="`width: ${gang.dangerousness*33.33}%;`"></div>
                                 </div>
                             </div>
-                            <a :href="'/gangs/' + gang._id" class="btn btn-primary">Ver detalles</a>
+                            <router-link :to="'/gangs/' + gang._id" class="btn btn-primary">Ver detalles</router-link>
                         </div>
                     </div>
                 </div>
@@ -48,6 +49,10 @@ import { getGangs } from '@/services/GangService'
 import { Gang } from '@/interfaces/Gang'
 
 export default defineComponent({
+    props:{
+        role: Number,
+        token: String
+    },
     data(){
         return {
             gangs: [] as Gang[]

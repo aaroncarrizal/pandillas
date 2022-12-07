@@ -14,39 +14,68 @@
                             <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea" v-model="gang.description" required></textarea>
                             <label for="floatingTextarea">Descripción</label>
                         </div>
-                        <label for="leader" class="form-label">Líder</label>
-                        <select id="leader" class="form-select" aria-label="Default select example" v-model="gang.leader">
-                            <template v-for="(member, index) in members" :key="index">
-                                <option :value="member._id">{{ member.name }}</option>
-                            </template>
-                        </select>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="name" v-model="gang.ageAverage" placeholder="promedio">
+                            <label for="name">Promedio de edades</label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p class="h5 text-center my-4">Ubicación</p>
-                    <!-- <div class="my-3">
-                        <input class="form-control my-1" placeholder="Calle" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Número" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Colonia" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Código Postal" v-model="gang.name"> 
-                        <input class="form-control my-1" placeholder="Entre calle y calle" v-model="gang.name"> 
-                    </div> -->
-                    seleccionar de las que ya estan
+                    <p class="h5 text-center my-4">Lugar de reunión</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="municipality" v-model="place.municipality" placeholder="Nombre" required>
+                                <label for="municipality">Municipalidad</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="delegacy" v-model="place.delegacy" placeholder="Nombre" required>
+                                <label for="delegacy">Delegación</label>
+                            </div>
+                            <label for="leader" class="form-label">Localidad</label>
+                            <select id="leader" class="form-select" aria-label="Default select example" v-model="place.locality" required>
+                                <option value="Norte">Norte</option>
+                                <option value="Sur">Sur</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Este">Este</option>
+                                <option value="Oeste">Oeste</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="suburb" v-model="place.suburb" placeholder="Nombre">
+                                    <label for="suburb">Colonia</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="street" v-model="place.street" placeholder="Nombre">
+                                    <label for="street">Calle</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="number" v-model="place.number" placeholder="Nombre">
+                                    <label for="number">Número</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="postalCode" v-model="place.postalCode" placeholder="Nombre">
+                                    <label for="postalCode">Código Postal</label>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="description" v-model="place.description" placeholder="Nombre">
+                                    <label for="description">Descripción</label>
+                                </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <p class="h5 text-center my-4">Delitos asociados</p>
-                    <!-- <div class="my-3">
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a persona</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a vehículo</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a casa habitación</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a comercio</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Robo a repartidores</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Narcomenudeo</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Extorsiones</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Daños</div>
-                        <div class="my-2"><input class="form-check-input" type="checkbox"> Otros Delitos</div>
-                    </div> -->
-                    Lista de los que ya existen
+                    <p class="h5 text-center my-4">Crimenes asociados</p>
+                    <select class="form-select" multiple aria-label="select" v-model="gang.crimes">
+                        <template v-for="(crime, index) in crimes" :key="index">
+                            <option :value="crime._id">{{ crime.name }}</option>
+                        </template>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -69,14 +98,13 @@
             </div>
             <div class="row mb-4">
                 <p class="h5 text-center my-4">Peligrosidad</p>
-                <label for="peligrosidad" class="form-label">0 a 5</label>
-                <input type="range" class="form-range" min="0" max="5" id="peligrosidad" v-model="gang.dangerousness">
+                <label for="peligrosidad" class="form-label">Baja, Media o Alta</label>
+                <input type="range" class="form-range" min="1" max="3" id="peligrosidad" v-model="gang.dangerousness">
             </div>
             <div class="row justify-content-center">
                 <div class="col-8">
                     <div class="d-grid gap-2">
                         <button class="btn btn-success" type="submit">Registrar</button>
-                        <button class="btn btn-secondary" type="submit">Limpiar</button> <!--Ojo-->
                     </div>
                 </div>
             </div>
@@ -92,25 +120,44 @@ import { getGangs } from '@/services/GangService'
 import { getMembers} from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
 import { Place } from '@/interfaces/Place'
+import { getPlaces } from '@/services/PlaceService'
+import { createPlace } from '@/services/PlaceService'
 import { Crime } from '@/interfaces/Crime'
+import { getCrimes } from '@/services/CrimeService'
+import router from '@/router'
 
 export default defineComponent({
     data() {
         return {
             gang: {} as Gang,
+            place: {} as Place,
             gangs: [] as Gang[],
-            members: [] as Member[]
+            members: [] as Member[],
+            places: [] as Place[],
+            crimes: [] as Crime[]
         }
     },
-    mounted(){
+    beforeMount(){
         this.loadMembers()
         this.loadGangs()
+        this.loadPlaces()
+        this.loadCrimes()
     },
     methods: {
         async saveGang(){
             try {
+                let placeId = await this.savePlace()
+                this.gang.reunionPlace = placeId
                 const res = await createGang(this.gang)
-                console.log(res)
+                router.push(`/gangs`)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async savePlace(){
+            try {
+                const res = await createPlace(this.place)
+                return res.data._id
             } catch (err) {
                 console.log(err)
             }
@@ -131,6 +178,25 @@ export default defineComponent({
                 console.log(err)
             }
         },
+        async loadPlaces(){
+            try {
+                const res = await getPlaces()
+                this.places = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async loadCrimes(){
+            try {
+                const res = await getCrimes()
+                this.crimes = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        getFullName(member: Member){
+            return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
+        }
     }
 })
 </script>
