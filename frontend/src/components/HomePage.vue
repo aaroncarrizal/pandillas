@@ -75,6 +75,7 @@
 import { defineComponent } from 'vue'
 import { getGangs } from '@/services/GangService'
 import { Gang } from '@/interfaces/Gang'
+import { getGang } from '@/services/GangService'
 import { Member } from '@/interfaces/Member'
 import { generatePDF } from '@/services/MailService'
 
@@ -106,7 +107,7 @@ export default defineComponent({
                 console.log(err)
             }
         },
-        search(){
+        async search(){
             for (const gang of this.gangs) {
                 // Filter by dangerousness
                 for(let i = 0; i < this.dangerousness.length; i++){
@@ -123,6 +124,11 @@ export default defineComponent({
             }
             this.newGangsIds = [...new Set(this.newGangsIds)];
             console.log(this.newGangsIds)
+            this.gangs = []
+            for (const index of this.newGangsIds) {
+                let res = await getGang(index)
+                this.gangs.push(res.data)
+            }
         },
         getFullName(member: Member){
             return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
