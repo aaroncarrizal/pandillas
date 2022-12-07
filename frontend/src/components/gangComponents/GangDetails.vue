@@ -102,6 +102,7 @@ import { getMembers} from '@/services/MemberService'
 import { Member } from '@/interfaces/Member'
 import { Place } from '@/interfaces/Place'
 import { Crime } from '@/interfaces/Crime'
+import router from '@/router'
 
 export default defineComponent({
     props:{
@@ -139,7 +140,7 @@ export default defineComponent({
         async removeGang(id: string){
             try {
                 await deleteGang(id)
-                window.location.href = '/gangs'
+                router.push('/gangs')
             } catch (error) {
                 console.log(error)
             }

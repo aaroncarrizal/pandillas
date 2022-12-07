@@ -54,6 +54,7 @@ import { Member } from '@/interfaces/Member'
 import { deleteMember } from '@/services/MemberService'
 import { Place } from '@/interfaces/Place'
 import { Crime } from '@/interfaces/Crime'
+import router from '@/router'
 
 export default defineComponent({
     props:{
@@ -81,7 +82,7 @@ export default defineComponent({
         async removeMember(id: string){
             try {
                 await deleteMember(id)
-                window.location.href = '/members'
+                router.push('/members')
             } catch (error) {
                 console.log(error)
             }

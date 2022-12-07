@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <h3 class="card-title">{{ member.name.firstName + ' ' + member.name.lastName}} </h3>
                             <h4>{{ member.alias }}</h4>
-                            <a :href="'/members/' + member._id" class="btn btn-primary">Ver detalles</a>
+                            <router-link :to="'/members/' + member._id" class="btn btn-primary">Ver detalles</router-link>
                         </div>
                     </div>
                 </div>
