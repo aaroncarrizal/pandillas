@@ -52,6 +52,13 @@
                     <p class="fw-light text-center">Ingresa como <router-link @click="loginAsCitizen()" to="#">Ciudadano</router-link></p>
                 </div>
             </div>
+            <div class="row justify-content-center my-3">
+                <div class="col-6">
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-primary" type="button" href="https://bloom.neo4j.io/index.html?connectURL=neo4j%2Bs%3A%2F%2Fa13cf024.databases.neo4j.io&_ga=2.134518897.1476296137.1670304518-1647308734.1665634591">Ir a base de datos Neo4J</a>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </template>
