@@ -95,6 +95,11 @@ const routes: RouteRecordRaw[] = [
         name: 'help-form',
         component: () => import('@/components/HelpForm.vue')
     },
+    {
+        path: '/faq',
+        name: 'faq',
+        component: () => import('@/components/FaqPage.vue')
+    },
 ]
 
 const router = createRouter({
