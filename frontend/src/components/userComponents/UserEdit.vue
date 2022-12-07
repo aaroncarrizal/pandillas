@@ -19,6 +19,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="row justify-content-center my-3">
+                    <div class="col-8 my-2">
+                        <div class="d-grid gap-2">
+                            <a @click="removeUser(this.userId)" class="btn btn-danger">Borrar usuario</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -27,6 +34,7 @@
 import { defineComponent } from 'vue'
 import { User } from '@/interfaces/User'
 import { getUser } from '@/services/userService'
+import { deleteUser } from '@/services/userService'
 import { updateUser } from '@/services/userService'
 import router from '@/router'
 
@@ -65,7 +73,15 @@ export default defineComponent({
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+        async removeUser(id: string){
+            try {
+                await deleteUser(this.token, id)
+                router.push('/users')
+            } catch (error) {
+                console.log(error)
+            }
+        },
     },
 })
 </script>
