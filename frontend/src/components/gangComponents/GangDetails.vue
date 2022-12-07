@@ -16,16 +16,18 @@
                                     <h4 v-if="gang.leader">{{ getFullName(gang.leader) }}</h4>
                                     <h4 v-else>Sin líder registrado</h4>
                                 </div>
-                                <div class="col-sm-2">
-                                    <div class="d-grid gap-2">
-                                        <router-link :to="`/gangs/edit/${gangId}`" class="btn btn-primary" role="button">Editar</router-link>
+                                <template v-if="(this.role == 2)">
+                                    <div class="col-sm-2">
+                                        <div class="d-grid gap-2">
+                                            <router-link :to="`/gangs/edit/${gangId}`" class="btn btn-primary" role="button">Editar</router-link>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="d-grid gap-2">
-                                        <a @click="removeGang(gangId)" class="btn btn-danger" role="button">Borrar</a>
+                                    <div class="col-sm-2">
+                                        <div class="d-grid gap-2">
+                                                <a @click="removeGang(gangId)" class="btn btn-danger" role="button">Borrar</a>
+                                            </div>
                                     </div>
-                                </div>
+                                </template>
                             </div>
                             <div class="row">
                                 <div class="col-sm-2">
@@ -102,6 +104,9 @@ import { Place } from '@/interfaces/Place'
 import { Crime } from '@/interfaces/Crime'
 
 export default defineComponent({
+    props:{
+        role: Number
+    },
     data() {
         return {
             gang: {} as Gang,

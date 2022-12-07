@@ -8,16 +8,18 @@
                                 <div class="col-sm-8">
                                     <h1 class="card-title">{{ getFullName(member) }}</h1>
                                 </div>
-                                <div class="col-sm-2">
-                                    <div class="d-grid gap-2">
-                                        <a :href="`/members/edit/${memberId}`" class="btn btn-primary" role="button">Editar</a>
+                                <template v-if="(this.role == 2)">
+                                    <div class="col-sm-2">
+                                        <div class="d-grid gap-2">
+                                            <router-link :to="`/members/edit/${memberId}`" class="btn btn-primary" role="button">Editar</router-link>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="d-grid gap-2">
-                                        <a @click="removeMember(memberId)" class="btn btn-danger" role="button">Borrar</a>
+                                    <div class="col-sm-2">
+                                        <div class="d-grid gap-2">
+                                            <a @click="removeMember(memberId)" class="btn btn-danger" role="button">Borrar</a>
+                                        </div>
                                     </div>
-                                </div>
+                                </template>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -54,6 +56,9 @@ import { Place } from '@/interfaces/Place'
 import { Crime } from '@/interfaces/Crime'
 
 export default defineComponent({
+    props:{
+        role: Number
+    },
     data() {
         return {
             member: {} as Member,
