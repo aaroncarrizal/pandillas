@@ -62,6 +62,13 @@
                 </template>
             </b-table>
         </div>
+        <div class="row">
+            <div class="col-12">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" @click="generateReport()">Generar reporte</button>
+                    </div>
+            </div>
+        </div>
     </b-container>
 </template>
 <script lang="ts">
@@ -69,6 +76,7 @@ import { defineComponent } from 'vue'
 import { getGangs } from '@/services/GangService'
 import { Gang } from '@/interfaces/Gang'
 import { Member } from '@/interfaces/Member'
+import { generatePDF } from '@/services/MailService'
 
 export default defineComponent({
     data(){
@@ -82,7 +90,8 @@ export default defineComponent({
                 { key: 'reunionPlace', label: 'Zona de reunión', sortable: true},
             ],
             dangerousness: [] as number[],
-            localities: [] as string[]
+            localities: [] as string[],
+            newGangsIds: [] as string[]
         }
     },
     beforeMount(){
@@ -98,30 +107,33 @@ export default defineComponent({
             }
         },
         search(){
-            console.log(this.dangerousness)
-            console.log(this.localities)
-            // 
-            let newGangs = []
             for (const gang of this.gangs) {
                 // Filter by dangerousness
                 for(let i = 0; i < this.dangerousness.length; i++){
                     if(gang.dangerousness == this.dangerousness[i]){
-                        newGangs.push(gang._id)
+                        this.newGangsIds.push(gang._id)
                     }
                 }
                 // Filter by locality
                 for(let i = 0; i < this.localities.length; i++){
                     if(gang.reunionPlace.locality == this.localities[i]){
-                        newGangs.push(gang._id)
+                        this.newGangsIds.push(gang._id)
                     }
                 }
             }
-            newGangs = [...new Set(newGangs)];
-            console.log(newGangs)
+            this.newGangsIds = [...new Set(this.newGangsIds)];
+            console.log(this.newGangsIds)
         },
         getFullName(member: Member){
             return member.name.firstName + ' ' + member.name.middleName + ' ' + member.name.lastName
         },
+        async generateReport(){
+            try {
+                const res = await generatePDF(this.newGangsIds)
+            } catch (error) {
+                console.log(error)
+            }
+        }
     },
 })
 </script>
