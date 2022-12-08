@@ -27,6 +27,7 @@
 import { defineComponent } from "vue";
 import { Crime } from "@/interfaces/Crime";
 import { createCrime } from "@/services/CrimeService";
+import router from "@/router";
 
 export default defineComponent({
     data() {
@@ -39,7 +40,7 @@ export default defineComponent({
             try {
                 const res = await createCrime(this.crime);
                 console.log(res);
-                window.location.href = `/crimes`;
+                router.push(`/crimes`)
             } catch (err) {
                 console.log(err);
             }

@@ -20,6 +20,3 @@ Utilizamos cookies de registro del tráfico para identificar qué páginas se es
         </ol>
     </div>
 </template>
-
-<script></script>
-<style></style>

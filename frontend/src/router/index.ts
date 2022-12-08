@@ -72,13 +72,18 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/users',
-        name: 'users-list',
-        component: () => import('@/components/UsersList.vue')
+        name: 'users',
+        component: () => import('@/components/userComponents/UserList.vue')
     },
     {
         path: '/users/new',
         name: 'users-new',
-        component: () => import('@/components/UserForm.vue')
+        component: () => import('@/components/userComponents/UserForm.vue')
+    },
+    {
+        path: '/users/edit/:id',
+        name: 'users-edit',
+        component: () => import('@/components/userComponents/UserEdit.vue')
     },
     {
         path: '/home',
@@ -89,6 +94,11 @@ const routes: RouteRecordRaw[] = [
         path: '/help',
         name: 'help-form',
         component: () => import('@/components/HelpForm.vue')
+    },
+    {
+        path: '/faq',
+        name: 'faq',
+        component: () => import('@/components/FaqPage.vue')
     },
 ]
 

@@ -43,11 +43,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="municipality" v-model="place.municipality" placeholder="Nombre" required>
+                                <input type="text" class="form-control" id="municipality" v-model="place.municipality" placeholder="Nombre" >
                                 <label for="municipality">Municipalidad</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="delegacy" v-model="place.delegacy" placeholder="Nombre" required>
+                                <input type="text" class="form-control" id="delegacy" v-model="place.delegacy" placeholder="Nombre" >
                                 <label for="delegacy">Delegación</label>
                             </div>
                             <label for="leader" class="form-label">Localidad</label>

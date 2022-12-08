@@ -42,6 +42,7 @@
 import { defineComponent } from 'vue'
 import { Mail } from '@/interfaces/Mail'
 import { sendEmail } from '@/services/MailService'
+import router from '@/router'
 
 export default defineComponent({
     data() {
@@ -53,6 +54,7 @@ export default defineComponent({
         async sendMail(){
             console.log('send')
             await sendEmail(this.mailData)
+            router.push('/home')
         }
     }
 })

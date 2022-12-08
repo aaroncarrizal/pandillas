@@ -8,16 +8,18 @@
                                 <div class="col-sm-8">
                                     <h1 class="card-title">{{ getFullName(member) }}</h1>
                                 </div>
-                                <div class="col-sm-2">
-                                    <div class="d-grid gap-2">
-                                        <a :href="`/members/edit/${memberId}`" class="btn btn-primary" role="button">Editar</a>
+                                <template v-if="(this.role == 2)">
+                                    <div class="col-sm-2">
+                                        <div class="d-grid gap-2">
+                                            <router-link :to="`/members/edit/${memberId}`" class="btn btn-primary" role="button">Editar</router-link>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="d-grid gap-2">
-                                        <a @click="removeMember(memberId)" class="btn btn-danger" role="button">Borrar</a>
+                                    <div class="col-sm-2">
+                                        <div class="d-grid gap-2">
+                                            <a @click="removeMember(memberId)" class="btn btn-danger" role="button">Borrar</a>
+                                        </div>
                                     </div>
-                                </div>
+                                </template>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -52,8 +54,12 @@ import { Member } from '@/interfaces/Member'
 import { deleteMember } from '@/services/MemberService'
 import { Place } from '@/interfaces/Place'
 import { Crime } from '@/interfaces/Crime'
+import router from '@/router'
 
 export default defineComponent({
+    props:{
+        role: Number
+    },
     data() {
         return {
             member: {} as Member,
@@ -76,7 +82,7 @@ export default defineComponent({
         async removeMember(id: string){
             try {
                 await deleteMember(id)
-                window.location.href = '/members'
+                router.push('/members')
             } catch (error) {
                 console.log(error)
             }

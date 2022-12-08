@@ -5,15 +5,15 @@
             <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Editar</th>
+                <th>Borrar</th>
             </tr>
             </thead>
             <tbody>
                 <tr  v-for="(crime, index) in crimes" :key="index">
                     <td>{{crime.name}}</td>
                     <td class="text-center">
-                        <a :href="`/crimes/edit/${crime._id}`" class="btn btn-primary" role="button">
-                            <i class="bi bi-pencil-square "></i>
+                        <a @click="removeCrime(crime._id)" class="btn btn-danger" role="button">
+                            <i class="bi bi-trash-fill"></i>
                         </a>
                     </td>
                 </tr>
@@ -24,7 +24,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { Crime } from '@/interfaces/Crime'
+import { deleteCrime } from '@/services/CrimeService'
 import { getCrimes } from '@/services/CrimeService'
+import router from '@/router'
 
 export default defineComponent({
     data(){
@@ -44,6 +46,14 @@ export default defineComponent({
                 console.log(err)
             }
         },
+        async removeCrime(id: string){
+            try {
+                await deleteCrime(id)
+                this.loadCrimes()
+            } catch (error) {
+                console.log(error)
+            }
+        }
     },
 })
 </script>
